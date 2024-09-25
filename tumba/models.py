@@ -1,20 +1,23 @@
+from django.db import models
 from .utils import BaseModelTumba
 
-# modelo lote
+
+# Clase lote
 class Lote (BaseModelTumba):
     blockName = models.CharField(max_length=3, verbose_name='lote')
 
-# modelo tumba
+# Clase tumba
 class Tumba (BaseModelTumba):
-    TIPO_NICHO_CHOICES[
+    # Definiendo las opciones de tipo de nichos
+    TIPO_NICHO_CHOICES = [
         ('T','Tumba de tierra'),
         ('E','Tumba extramuros'),
     ]
     nicheNumber = models.IntegerField(max_length=4, verbose_name='tumba')
-    nicheType = models.CharField(max_length=2, choices= TIPO_NICHO_CHOICES, verbose_name='tipo')
+    nicheType = models.CharField(max_length=1, verbose_name='tipo', choices= TIPO_NICHO_CHOICES)
     nameLote = models.ForeignKey(Lote, related_name='tumbaLote', on_delete=models.CASCADE) 
 
-# modelo Disponibilidad
+# Clase Disponibilidad
 class DisponibleTumba (BaseModelTumba):
     startDate = models.DateTimeField(verbose_name='inicio')
     endDate = models.DateTimeField(verbose_name='vence')
