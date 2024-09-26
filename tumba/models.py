@@ -13,7 +13,7 @@ class Tumba (BaseModelTumba):
         ('T','Tumba de tierra'),
         ('E','Tumba extramuros'),
     ]
-    nicheNumber = models.IntegerField(max_length=4, verbose_name='tumba')
+    nicheNumber = models.IntegerField( verbose_name='tumba')
     nicheType = models.CharField(max_length=1, verbose_name='tipo', choices= TIPO_NICHO_CHOICES)
     nameLote = models.ForeignKey(Lote, related_name='tumbaLote', on_delete=models.CASCADE) 
 
