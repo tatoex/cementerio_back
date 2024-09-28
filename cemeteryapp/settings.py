@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     "difunto",
     "tumba",
     "servicio",
+    "auditoria",
     #documentacion
     'drf_spectacular',
 
@@ -130,9 +131,12 @@ STATIC_URL = "static/"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-# Autoschema Documentation
-REST_FRAMEWORK = {    
 
+# Autoschema Documentation y autenticacion
+REST_FRAMEWORK = {    
     'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+    'DEFAULT_AUTHENTUCATION_CLASSES':(
+        'rest_framework.authentication.SessionAuthentication'
+    )
 }
 
