@@ -230,5 +230,6 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 ordenar_requirements.sh
-
+lote.json
+cargarApi_lote.py
 # End of https://www.toptal.com/developers/gitignore/api/windows,macos,django
