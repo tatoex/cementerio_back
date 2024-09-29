@@ -43,9 +43,11 @@ INSTALLED_APPS = [
     "difunto",
     "tumba",
     "servicio",
-    "auditoria",
     #documentacion
     'drf_spectacular',
+    #auditoria
+    'simple_history',
+    'historial',
 
 ]
 
@@ -57,6 +59,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "simple_history.middleware.HistoryRequestMiddleware",
 ]
 
 ROOT_URLCONF = "cemeteryapp.urls"
@@ -87,9 +90,9 @@ WSGI_APPLICATION = "cemeteryapp.wsgi.application"
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'cementerioback',
-        'USER': 'tato',
-        'PASSWORD': '23122312',
+        'NAME': 'cementerio_back',
+        'USER': 'root',
+        'PASSWORD': '2312',
         'HOST': 'localhost',
         'PORT': '3306',
     }

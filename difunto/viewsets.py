@@ -8,6 +8,8 @@ class DifuntoViewSet(viewsets.ModelViewSet):
     #definir el queryset para traer los elementos
     queryset=Difunto.objects.all()
 
+    
+
 class DeudoViewSet(viewsets.ModelViewSet):
     #para todos los metodos utilice el serializerclass
     serializer_class=DeudoSerializer

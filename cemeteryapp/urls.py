@@ -24,4 +24,5 @@ urlpatterns = [
     path('api/', include('tumba.urls')),
     path('api/', include('servicio.urls')),
     path('api/', include('difunto.urls')),
+    path('api/', include('historial.urls')),
 ]

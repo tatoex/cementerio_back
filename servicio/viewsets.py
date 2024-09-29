@@ -13,3 +13,4 @@ class CeremoniaViewSet(viewsets.ModelViewSet):
     serializer_class=CeremoniaSerializer
     #definir el queryset para traer los elementos
     queryset=Ceremonia.objects.all()
+

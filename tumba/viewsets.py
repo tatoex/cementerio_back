@@ -20,3 +20,4 @@ class DisponibleTumbaViewSet(viewsets.ModelViewSet):
     serializer_class=DisponibleTumbaSerializer
     #definir el queryset para traer los elementos
     queryset=DisponibleTumba.objects.all()
+
