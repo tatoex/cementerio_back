@@ -7,8 +7,9 @@ class HistoricalQuerySetMixin:
     """clase para manejar la obtencionde datos del historial de cualquier modelo con filtros"""
     def get_queryset(self):
         """Retorna el historial filtrada si se proporciona"""
+        queryset=self.model.history.all()
         # Id
-        object_id=self.request.query_params.get(f'{self.model_name.lower()}_id', None)
+        object_id=self.request.query_params.get(f'{self.model._meta.model_name.lower()}_id', None)
         if object_id:
             queryset=queryset.filter(id=object_id).order_by('-history_date')
 
@@ -37,7 +38,7 @@ class HistoricalActionMixin:
     def historical(self, request):
         """devuelve el historial del objeto"""
 
-        object_id=self.request.query_params.get(f'{self.model_name.lower()}_id')
+        object_id=self.request.query_params.get(f'{self.model._meta.model_name.lower()}_id', None)
         if not object_id:
             return Response({"error":"Debe proporcionar la ID del objeto"}, status=status.HTTP_400_BAD_REQUEST)
         historial=consultar_historial(self.model,object_id)
@@ -53,16 +54,22 @@ class HistoricalActionMixin:
         if not version1_id or not version2_id:
             return Response({"error":"Debe proporcionar la ID del objeto"}, status=status.HTTP_400_BAD_REQUEST)
         
-        version1=self.model.history.get(histort_id=version1_id)
-        version2=self.model.history.get(histort_id=version2_id)
-
+        if version1_id==version2_id:
+            return Response({"error":"No se puede comparar la misma version. Proporcione versiones diferentes"},status=status.HTTP_400_BAD_REQUEST)
+        
+        try:
+            version1=self.model.history.get(history_id=version1_id)
+            version2=self.model.history.get(history_id=version2_id)
+        except self.model.history.model.DoesNotExist:
+            return Response({"error":"Una de las versiones no existe"},status=status.HTTP_404_NOT_FOUND)
+        
         diferencias=obtener_difernecia(version1, version2)
         return Response({"diferencias":diferencias})
     
     @action (detail=False, methods=['post'])
     def restaurar(self,request):
         """Restaura yb objeto a una version anterior"""
-        version_id=request.data.get(version_id)
+        version_id=request.data.get('version_id')
         if not version_id:
             return Response({"error":"Debe proporcionar la ID del objeto"}, status=status.HTTP_400_BAD_REQUEST)
         version=self.model.histry.get(hitory_id=version_id)
