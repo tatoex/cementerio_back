@@ -9,32 +9,30 @@ class HistoricalQuerySetMixin:
         """Retorna el historial filtrada si se proporciona"""
         queryset=self.model.history.all()
         # Id
-        object_id=self.request.query_params.get(f'{self.model._meta.model_name.lower()}_id', None)
-        if object_id:
-            queryset=queryset.filter(id=object_id).order_by('-history_date')
-
+        entity_id=self.request.query_params.get(f'{self.model._meta.model_name.lower()}_id', None)
         # Fechas
         start_date = self.request.query_params.get('stat_date', None)
         end_date = self.request.query_params.get('end_date', None)
+        # Tipo accio
+        history_type=self.request.query_params.get('history_type', None)
+        # Usuario
+        user_id=self.request.query_params.get('user_id', None)
+
+        if entity_id:
+            queryset=queryset.filter(id=entity_id).order_by('-history_date')
         if start_date:
             queryset=queryset.filter(histoy_date__gte=start_date)
         if end_date:
             queryset=queryset.filter(histoy_date__lte=end_date)
-        
-        # Tipo accio
-        history_type=self.request.query_params.get('history_type', None)
         if history_type:
             queryset=queryset.filter(history_type=history_type)
-        
-        # Usuario
-        user_id=self.request.query_params.get('user_id', None)
         if user_id:
             queryset=queryset.filter(history_user_id=user_id)
         return queryset
 
 class HistoricalActionMixin:
     """clase para manejar acciones: consultas, comparar y restaurar versiones """
-    @action (detail=False, methods=['get'])
+    @action (methods=['GET'], detail=False, url_path='historial' )
     def historical(self, request):
         """devuelve el historial del objeto"""
 
@@ -45,7 +43,7 @@ class HistoricalActionMixin:
         serializer=self.get_serializer(historial, many=True)
         return Response(serializer.data)
     
-    @action (detail=False, methods=['get'])
+    @action (methods=['GET'], detail=False, url_path='comparar')
     def comparar(self, request):
         """compara dos versiones del historial"""
         version1_id=request.query_params.get('version1_id')
@@ -66,7 +64,7 @@ class HistoricalActionMixin:
         diferencias=obtener_difernecia(version1, version2)
         return Response({"diferencias":diferencias})
     
-    @action (detail=False, methods=['post'])
+    @action (methods=['GET'], detail=False, url_path='restaurar')
     def restaurar(self,request):
         """Restaura yb objeto a una version anterior"""
         version_id=request.data.get('version_id')

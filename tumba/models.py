@@ -23,8 +23,10 @@ class Tumba (BaseModelTumba):
     ]
     nicheNumber = models.IntegerField( verbose_name='tumba')
     nicheType = models.CharField(max_length=1, verbose_name='tipo', choices= TIPO_NICHO_CHOICES)
+    available = models.BooleanField(default=True)
     history=HistoricalRecords()
     nameLote = models.ForeignKey(Lote, related_name='tumbaLote', on_delete=models.CASCADE) 
+    
 
 
 # Clase Disponibilidad

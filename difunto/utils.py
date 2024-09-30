@@ -7,7 +7,7 @@ class BaseModelDifunto(models.Model):
     idNumber = models.CharField(max_length=10, unique=True, verbose_name='cedula')
     loadDate = models.DateTimeField(auto_now_add=True, verbose_name='creacion')
     updateDate = models.DateTimeField(auto_now=True, verbose_name='actualizacion')
-    decription = models.TextField(max_length=300, blank=True, null=True, verbose_name='observaciones')
+    description = models.TextField(max_length=300, blank=True, null=True, verbose_name='observaciones')
 
 
     class Meta:
