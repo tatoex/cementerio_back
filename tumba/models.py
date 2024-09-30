@@ -1,7 +1,7 @@
 from django.db import models
+from django.contrib.auth.models import User
 from simple_history.models import HistoricalRecords
 from .utils import BaseModelTumba
-from django.contrib.auth.models import User
 
 # Clase lote
 class Lote (BaseModelTumba):
@@ -35,4 +35,5 @@ class DisponibleTumba (BaseModelTumba):
     endDate = models.DateTimeField(verbose_name='vence')
     history=HistoricalRecords()
     numberTumba = models.ForeignKey(Tumba, related_name='disponibleTumba', on_delete=models.DO_NOTHING) 
+
 
