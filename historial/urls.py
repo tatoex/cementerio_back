@@ -13,7 +13,7 @@ router.register(r'difunto-history',HistoricalDifuntoViewSet, basename='difunto-h
 router.register(r'deudo-history',HistoricalDeudoViewSet, basename='deudo-history')
 router.register(r'lote-history',HistoricalLoteViewSet, basename='lote-history')
 router.register(r'tumba-history',HistoricalTumbaViewSet, basename='tumba-history')
-router.register(r'disponible-tumba-history',HistoricalDisponibleTumbaViewSet, basename='disponible-tumba-history')
+router.register(r'disponibilidad-history',HistoricalDisponibleTumbaViewSet, basename='disponibilidad-history')
 router.register(r'servicio-history',HistoricalServicioViewSet, basename='servicio-history')
 router.register(r'ceremonia-history',HistoricalCeremoniaViewSet, basename='ceremonia-history')
 
