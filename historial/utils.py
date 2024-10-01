@@ -38,7 +38,7 @@ def compara_varias_versiones(model, object_id, attribute="all", limit=5):
     cambios = []
 
     for i in range(len(historial)-1):
-
+        # Compara cada version con la siguiente y obtiene los cambios (todos o un especifico)
         diferencias = comparar_versiones(historial[i], historial[i+1], attribute)
         if diferencias:
             cambios.append({
