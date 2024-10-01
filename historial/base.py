@@ -35,10 +35,9 @@ class HistoricalActionMixin:
     @action (methods=['GET'], detail=False, url_path='historial' )
     def historical(self, request):
         """
-        Devuelve el historial del objeto segun su ID.
-        URL Parameters:
-        -object_id: ID del objeto para obtener su historial
-        -limit:(opcional) Numero de verirsiones a mostrar (por defecto).
+        Devuelve el historial del objeto segun su ID URL Parameters:
+        - object_id: ID del objeto para obtener su historial.
+        - limit: (opcional) Numero de verirsiones a mostrar (por defecto).
         """
 
         object_id=self.request.query_params.get(f'{self.model._meta.model_name.lower()}_id', None)

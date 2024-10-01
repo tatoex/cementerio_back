@@ -12,13 +12,16 @@ class BaseModelTumba(models.Model):
         abstract = True
 
 def actualizar_estado_disponibilidad(tumba):
-    """Sincroniza las fechas de Disponibilidad en funcion a servicio"""
+    """
+    Actualiza el estado 'available' de la tumba basando en la fecha actual y la fecha de DisponibilidadTumba
+    """
     DisponibleTumba=models.get_model('tumba','DisponibleTumba')
     disponibilidad=DisponibleTumba.objects.filter(numberTumba=tumba).first()
     if disponibilidad:
-                now=timezone.now()
-                if disponibilidad.startDate<=now<=disponibilidad.endDate:
-                    tumba.available=True
-                else:
-                    tumba.available=False
-                tumba.save()
+        now=timezone.now()
+        # verificando si la fecha actual esta dentro del rango de Disponibilidad
+        if disponibilidad.startDate<=now<=disponibilidad.endDate:
+            tumba.available=False
+        else:
+            tumba.available=True
+        tumba.save()
