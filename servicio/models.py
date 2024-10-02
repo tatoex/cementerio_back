@@ -9,7 +9,7 @@ class Servicio(BaseModelServicio):
     startDate = models.DateTimeField(verbose_name='inicio')
     endDate = models.DateTimeField(null=True, blank=True, verbose_name='vecimiento')
     history=HistoricalRecords()
-    numberTomb = models.ForeignKey(Tumba, related_name='servicioTumba', on_delete=models.DO_NOTHING) 
+    numberTomb = models.ForeignKey(Tumba, related_name='servicioTumba', on_delete=models.DO_NOTHING, null=True,blank=True) 
     deceased = models.ForeignKey(Difunto, related_name='servicioDifunto', on_delete=models.DO_NOTHING)
     deudo = models.ForeignKey(Deudo, null=True,related_name='servicioDeudo', on_delete=models.DO_NOTHING)  
 
