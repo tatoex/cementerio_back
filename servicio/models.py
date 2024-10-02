@@ -1,6 +1,6 @@
 from django.db import models
 from simple_history.models import HistoricalRecords
-from .utils import BaseModelServicio
+from .base import BaseModelServicio
 from tumba.models import Tumba
 from difunto.models import Difunto, Deudo
 

@@ -1,5 +1,5 @@
 from django.db import models
-from .utils import BaseModelDifunto
+from .base import BaseModelDifunto
 from simple_history.models import HistoricalRecords
 from tumba.models import Tumba
 
