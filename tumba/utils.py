@@ -1,3 +1,4 @@
+from django.db import models
 from django.utils import timezone
 
 def actualizar_estado_disponibilidad(tumba):
