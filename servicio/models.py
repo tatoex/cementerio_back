@@ -19,6 +19,7 @@ class Ceremonia(BaseModelServicio):
         ('Cremacion','Cremación'),
         ('Inhumacion','Inhumación'),
         ('Exhumacion','Exhumación'),
+        ('Conmemoracion','Conmemoración'),
         ('Mantenimiento','Mantenimiento'),
     ]
     names = models.CharField(max_length=50, verbose_name='tipo', choices= TIPO_CEREMONIA_CHOICES)
