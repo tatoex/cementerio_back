@@ -40,14 +40,20 @@ INSTALLED_APPS = [
     # Django REST Framework
     "rest_framework",
     # Apps
+    # Registro
     "difunto",
     "tumba",
     "servicio",
-    #documentacion
+    #Informativa
+    "iglesias",
+    "obituarios",
+    "informativos",
+    #Documentacion
     'drf_spectacular',
-    #auditoria
+    #Auditoria
     'simple_history',
     'historial',
+    
 
 ]
 
