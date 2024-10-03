@@ -15,7 +15,6 @@ class Iglesia(BaseIglesia):
     phone = models.CharField(max_length=15, null=True, blank=True, verbose_name='Telefono')
     email = models.EmailField(null=True, blank=True, verbose_name='Email')
     schedule = models.TextField(null=True, blank=True, verbose_name='Horario')
-    facebook_url = models.URLField(null=True, blank=True,verbose_name='Pagina de Facebook')
     priest = models.CharField(max_length=100, null=True, blank=True, verbose_name='Sacerdote')
     logo=models.ImageField(upload_to='logo/', null=True, blank=True, verbose_name='Logo')
     history = HistoricalRecords()
