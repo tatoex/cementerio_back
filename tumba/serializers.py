@@ -8,12 +8,14 @@ class LoteSerializer(serializers.ModelSerializer):
         read_only_fields = ('modified_by',)
 
 class TumbaSerializer(serializers.ModelSerializer):
+    nameLote = LoteSerializer(read_only=True)
     class Meta:
         model = Tumba
         fields = '__all__'
      
 
 class DisponibleTumbaSerializer(serializers.ModelSerializer):
+    numberTumba =TumbaSerializer(read_only=True)
     class Meta:
         model = DisponibleTumba
         fields = '__all__'

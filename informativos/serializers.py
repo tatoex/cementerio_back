@@ -17,6 +17,7 @@ class ServicioInfoSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class SeccionArticuloSerializer(serializers.ModelSerializer):
+    article = ArticuloSerializer(read_only=True)
     class Meta:
         model = SeccionArticulo
         fields = '__all__'
