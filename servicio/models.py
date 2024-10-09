@@ -24,5 +24,8 @@ class Ceremonia(BaseModelServicio):
     ]
     names = models.CharField(max_length=50, verbose_name='tipo', choices= TIPO_CEREMONIA_CHOICES)
     date = models.DateTimeField(verbose_name='fecha')
+    is_paid=models.BooleanField(default=False, verbose_name='Cancelado')
+    amount_paid=models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True, verbose_name='Monto')
+    payment_date=models.DateTimeField(null=True, blank=True, verbose_name='Fecha de pago')
     history=HistoricalRecords()
     servicios = models.ForeignKey(Servicio, related_name='ceremoniaServicio', on_delete=models.CASCADE) 

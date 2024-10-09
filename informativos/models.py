@@ -4,7 +4,7 @@ from .base import BaseInformativo
 # Create your models here.
 
 class Articulo(BaseInformativo):
-    references =models.TextField(blank=True ,null=True, verbose_name='Referencias')
+    references = models.TextField(blank=True ,null=True, verbose_name='Referencias')
     external_source = models.URLField(null=True, blank=True,verbose_name='Fuentes externas')
     publication_date = models.DateTimeField(auto_now_add=True, verbose_name='Fecha de publicacion')
     author = models.CharField(max_length=100, verbose_name='Autor')
@@ -17,8 +17,9 @@ class Guia(BaseInformativo):
     history = HistoricalRecords()
 
 class ServicioInfo(BaseInformativo):
-    features=models.TextField( verbose_name='Caracteristicas incluidas')
-    exclusions=models.TextField( null=True, blank=True, verbose_name='Exclusiones')
+    features = models.TextField( verbose_name='Caracteristicas incluidas')
+    exclusions = models.TextField( null=True, blank=True, verbose_name='Exclusiones')
+    price = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True, verbose_name='Precio')
     history = HistoricalRecords()
     
 class SeccionArticulo(models.Model):
