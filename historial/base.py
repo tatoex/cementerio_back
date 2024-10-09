@@ -1,34 +1,7 @@
 from rest_framework import status, viewsets
 from rest_framework.decorators import action
 from rest_framework.response import Response
-from .utils import consultar_historial, obtener_historial_limitado, compara_varias_versiones, comparar_versiones
-
-class HistoricalQuerySetMixin:
-    """clase para manejar la obtencionde datos del historial de cualquier modelo con filtros"""
-    def get_queryset(self):
-        """Retorna el historial filtrada si se proporciona"""
-        queryset=self.model.history.all()
-        # Id
-        entity_id=self.request.query_params.get(f'{self.model._meta.model_name.lower()}_id', None)
-        # Fechas
-        start_date = self.request.query_params.get('stat_date', None)
-        end_date = self.request.query_params.get('end_date', None)
-        # Tipo accio
-        history_type=self.request.query_params.get('history_type', None)
-        # Usuario
-        user_id=self.request.query_params.get('user_id', None)
-
-        if entity_id:
-            queryset=queryset.filter(id=entity_id).order_by('-history_date')
-        if start_date:
-            queryset=queryset.filter(histoy_date__gte=start_date)
-        if end_date:
-            queryset=queryset.filter(histoy_date__lte=end_date)
-        if history_type:
-            queryset=queryset.filter(history_type=history_type)
-        if user_id:
-            queryset=queryset.filter(history_user_id=user_id)
-        return queryset
+from .utils import obtener_historial_limitado, compara_varias_versiones
 
 class HistoricalActionMixin:
     """clase para manejar acciones: consultas, comparar y restaurar versiones """
