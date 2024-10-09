@@ -15,7 +15,6 @@ class ArticuloFilter(django_filters.FilterSet):
 class GuiaFilter(django_filters.FilterSet):
     title = django_filters.CharFilter(lookup_expr='icontains')
     category = django_filters.CharFilter(lookup_expr='icontains')
-    description_short = django_filters.CharFilter(lookup_expr='icontains')
 
     class Meta:
         model = Guia
