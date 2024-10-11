@@ -7,7 +7,7 @@ from .base import BaseModelTumba
 class Lote (BaseModelTumba):
     blockName = models.IntegerField(verbose_name='bloque')
     typeblock=models.CharField(max_length=3, verbose_name='Tipo')
-    numbersblock=models.IntegerField(verbose_name='numero de tipo', null=True)
+    numbersblock=models.IntegerField(verbose_name='numero de tipo')
     filas=models.IntegerField(verbose_name='Nuero de filas')
     columnas=models.IntegerField(verbose_name='Nuero de columnas')
     limite=models.IntegerField(verbose_name='Limite de espacio')

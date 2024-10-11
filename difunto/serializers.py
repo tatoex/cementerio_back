@@ -8,8 +8,8 @@ class DeudoSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class DifuntoSerializer(serializers.ModelSerializer):
-    tumba = TumbaSerializer(read_only=True)
-    deudo = DeudoSerializer(read_only=True)
+    # tumba = TumbaSerializer(read_only=True)
+    # deudo = DeudoSerializer(read_only=True)
     class Meta:
         model = Difunto
         fields = '__all__'
