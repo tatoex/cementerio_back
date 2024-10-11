@@ -8,7 +8,7 @@ class LoteSerializer(serializers.ModelSerializer):
         read_only_fields = ('modified_by',)
 
 class TumbaSerializer(serializers.ModelSerializer):
-    nameLote = LoteSerializer(read_only=True)
+    # nameLote = LoteSerializer(read_only=True)
     class Meta:
         model = Tumba
         fields = '__all__'

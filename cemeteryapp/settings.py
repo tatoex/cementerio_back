@@ -24,11 +24,8 @@ SECRET_KEY = "django-insecure-qda&dno%ojmp6jaa&(-ti3q20d#mqzs&f5bi6_t*c7lhuf5t*s
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-CORS_ALLOW_ALL_ORIGINS = True
-ALLOWED_HOSTS = ['172.17.244.183', 'localhost', '127.0.0.1']
-CORS_ALLOWED_ORIGINS = [
-    'http://192.168.100.4',  # IP de tu Mac
-]
+
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -159,7 +156,10 @@ REST_FRAMEWORK = {
         'django_filters.rest_framework.DjangoFilterBackend',
     ),
 }
-
+CORS_ALLOWED_ORIGINS = [
+    'http://192.168.100.4',  # IP de tu Mac
+]
+CORS_ALLOW_ALL_ORIGINS = True
 
 
 SPECTACULAR_SETTINGS = {
