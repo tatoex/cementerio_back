@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    'corsheaders',
     # Django REST Framework
     "rest_framework",
     # Filtros
@@ -69,6 +70,7 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "simple_history.middleware.HistoryRequestMiddleware",
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = "cemeteryapp.urls"
@@ -100,7 +102,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'cementerio_back',
-        'USER': 'root',
+        'USER': 'rena',
         'PASSWORD': '2312',
         'HOST': 'localhost',
         'PORT': '3306',
@@ -154,6 +156,11 @@ REST_FRAMEWORK = {
         'django_filters.rest_framework.DjangoFilterBackend',
     ),
 }
+CORS_ALLOWED_ORIGINS = [
+    'http://192.168.100.4',  # IP de tu Mac
+]
+CORS_ALLOW_ALL_ORIGINS = True
+
 
 SPECTACULAR_SETTINGS = {
     'TITLE': 'Cementerio API',
