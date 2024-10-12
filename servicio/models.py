@@ -11,7 +11,7 @@ class Servicio(BaseModelServicio):
     history=HistoricalRecords()
     numberTomb = models.ForeignKey(Tumba, related_name='servicioTumba', on_delete=models.DO_NOTHING, null=True,blank=True) 
     deceased = models.ForeignKey(Difunto, related_name='servicioDifunto', on_delete=models.DO_NOTHING)
-    deudo = models.ForeignKey(Deudo, null=True,related_name='servicioDeudo', on_delete=models.DO_NOTHING)  
+
 
 # Clase ceremonia  
 class Ceremonia(BaseModelServicio):
