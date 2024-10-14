@@ -1,8 +1,10 @@
+from django_filters.rest_framework import DjangoFilterBackend
+from django.contrib.auth.models import User
 from rest_framework.decorators import action
 from rest_framework.response import Response
+from rest_framework.permissions import IsAuthenticated
 from rest_framework import viewsets, status
-from django_filters.rest_framework import DjangoFilterBackend
-from .serializers import ServicioSerializer, CeremoniaSerializer
+from .serializers import ServicioSerializer, CeremoniaSerializer, UserProfileSerializer
 from .models import Servicio, Ceremonia
 from .filters import ServicioFilter, CeremoniaFilter
 from .utils import sincronizar_disponibilidad_tumba
@@ -30,3 +32,12 @@ class CeremoniaViewSet(viewsets.ModelViewSet):
     filter_backends = [DjangoFilterBackend]
     filterset_class = CeremoniaFilter
 
+class UserProfileViewSet(viewsets.ModelViewSet):
+    queryset = User.objects.all()
+    serializer_class = UserProfileSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_object(self):
+        user=request.user #obtener usuario autenticado
+        serializer=self.get_serializer(user)
+        return Response(serializer.data)

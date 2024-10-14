@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from rest_framework import serializers
 from .models import Servicio, Ceremonia
 from tumba.serializers import TumbaSerializer
@@ -8,12 +9,12 @@ class CeremoniaSerializer(serializers.ModelSerializer):
         model = Ceremonia
         fields = [
             'id',
-            'names',     # Campo del servicio
-            'date',       # Campo del servicio
+            'names',         # Campo del servicio
+            'date',          # Campo del servicio
             'description',   # Campo del servicio
-            'is_paid',      # Campo del servicio
-            'amount_paid',    # Campo del servicio
-            'payment_date',     # Campo del servicio
+            'is_paid',       # Campo del servicio
+            'amount_paid',   # Campo del servicio
+            'payment_date',  # Campo del servicio
         ]
         
 class ServicioSerializer(serializers.ModelSerializer):
@@ -30,5 +31,10 @@ class ServicioSerializer(serializers.ModelSerializer):
             'numberTomb',    # Campo del servicio
             'ceremonia',     # Campo del servicio
         ]
+
+class UserProfileSerializer(serializers.ModelSerializer):
+    class Meta:
+        model= User
+        fields =['id', 'username', 'first_name', 'last_name', 'email']
 
 
