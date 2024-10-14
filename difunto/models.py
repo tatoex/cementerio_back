@@ -15,6 +15,11 @@ class Deudo(BaseModelDifunto):
     address = models.CharField(max_length=100, blank=True, null=True, verbose_name='direccion')
     tipo = models.CharField(max_length=50, verbose_name='tipo relacion', choices=TIPO_DEUDO_CHOICES, null=True)
     history=HistoricalRecords()
+    class Meta:
+        permissions = [
+            ("can_view_deudo", "Can view deudo"),
+            ("can_edit_deudo", "Can edit deudo"),
+        ]
 
 # Clase difunto
 class Difunto(BaseModelDifunto):
@@ -22,4 +27,8 @@ class Difunto(BaseModelDifunto):
     history = HistoricalRecords()
     tumba = models.ForeignKey(Tumba, related_name='difuntoTumba', on_delete=models.DO_NOTHING, null=True, blank=True) 
     deudo = models.ForeignKey(Deudo, related_name='difuntoDeudo', on_delete=models.DO_NOTHING) 
-
+    class Meta:
+        permissions = [
+            ("can_view_difunto", "Can view difunto"),
+            ("can_edit_difunto", "Can edit difunto"),
+        ]

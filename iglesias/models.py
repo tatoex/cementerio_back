@@ -6,6 +6,11 @@ class Parroquia(BaseIglesia):
     name=models.CharField(max_length=100, verbose_name='nombre')
     churches_number = models.PositiveIntegerField(default=0, verbose_name='Numero de iglesias')
     history = HistoricalRecords()
+    class Meta:
+        permissions = [
+                ("can_view_parroquia", "Can view parroquia"),
+                ("can_edit_parroquia", "Can edit parroquia"),
+            ]
 
 class Iglesia(BaseIglesia):
     name=models.CharField(max_length=100, verbose_name='nombre')
@@ -19,7 +24,11 @@ class Iglesia(BaseIglesia):
     logo=models.ImageField(upload_to='logo/', null=True, blank=True, verbose_name='Logo')
     history = HistoricalRecords()
     parish = models.ForeignKey(Parroquia, related_name='iglesias', on_delete=models.CASCADE)
-    
+    class Meta:
+        permissions = [
+                ("can_view_iglesia", "Can view iglesia"),
+                ("can_edit_iglesia", "Can edit iglesia"),
+            ]
 
     
     @property
@@ -37,3 +46,8 @@ class LinkRedSocial(BaseIglesia):
     ]
     stage_type = models.CharField( max_length=50, choices=PLATAFORMAS_CHOICES, verbose_name='Etapas de las ceremonias')
     history = HistoricalRecords()
+    class Meta:
+        permissions = [
+                ("can_view_linkRedSocial", "Can view linkRedSocial"),
+                ("can_edit_linkRedSocial", "Can edit linkRedSocial"),
+            ]

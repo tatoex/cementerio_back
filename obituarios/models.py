@@ -11,7 +11,11 @@ class Obituario(BaseObituario):
     place = models.CharField(max_length=200, null=True, blank=True, verbose_name='lugar de la ceremonia')
     history = HistoricalRecords()
     deceased = models.OneToOneField(Difunto, related_name='obituarioDifunto', on_delete=models.CASCADE)
-
+    class Meta:
+        permissions = [
+                ("can_view_obituario", "Can view obituario"),
+                ("can_edit_obituario", "Can edit obituario"),
+            ]
     def __str__(self):
         return f"Obituario de {self.deceased.names} {self.deceased.last_names}"
     
@@ -22,7 +26,11 @@ class Memoria(BaseObituario):
     image = models.ImageField(upload_to='memories/', null=True, blank=True, verbose_name='Imagen opcional')
     history = HistoricalRecords()
     obituary = models.ForeignKey(Obituario, related_name='memoriaObituario', on_delete=models.CASCADE)
-
+    class Meta:
+        permissions = [
+                ("can_view_memoria", "Can view memoria"),
+                ("can_edit_memoria", "Can edit memoria"),
+            ]
     def __str__(self):
         return f"Recuerdo de {self.names} para {self.obituary.deceased.names} {self.obituary.deceased.last_names}"
     
@@ -40,6 +48,10 @@ class EtapasObituario(BaseObituario):
     history = HistoricalRecords()
     obituary = models.ForeignKey(Obituario, related_name='etapasObituario', on_delete=models.CASCADE)
     ceremony = models.ForeignKey(Ceremonia, related_name='etapasCeremonia', on_delete=models.CASCADE)
-
+    class Meta:
+        permissions = [
+                ("can_view_etapasObituario", "Can view etapasObituario"),
+                ("can_edit_etapasObituario", "Can edit etapasObituario"),
+            ]
     def __str__(self):
         return f"{self.stage_type} en {self.place} para {self.obituary.deceased.names} {self.obituary.deceased.last_names}"

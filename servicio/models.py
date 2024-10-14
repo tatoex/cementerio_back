@@ -11,7 +11,11 @@ class Servicio(BaseModelServicio):
     history=HistoricalRecords()
     numberTomb = models.ForeignKey(Tumba, related_name='servicioTumba', on_delete=models.DO_NOTHING, null=True,blank=True) 
     deceased = models.ForeignKey(Difunto, related_name='servicioDifunto', on_delete=models.DO_NOTHING)
-
+    class Meta:
+        permissions = [
+                ("can_view_servicio", "Can view servicio"),
+                ("can_edit_servicio", "Can edit servicio"),
+            ]
 
 # Clase ceremonia  
 class Ceremonia(BaseModelServicio):
@@ -29,3 +33,8 @@ class Ceremonia(BaseModelServicio):
     payment_date=models.DateTimeField(null=True, blank=True, verbose_name='Fecha de pago')
     history=HistoricalRecords()
     servicios = models.ForeignKey(Servicio, related_name='ceremoniaServicio', on_delete=models.CASCADE) 
+    class Meta:
+        permissions = [
+                ("can_view_ceremonia", "Can view ceremonia"),
+                ("can_edit_ceremonia", "Can edit ceremonia"),
+            ]

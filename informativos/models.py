@@ -10,17 +10,32 @@ class Articulo(BaseInformativo):
     author = models.CharField(max_length=100, verbose_name='Autor')
     is_featured = models.BooleanField(default= False, verbose_name='Noticia destacada')
     history = HistoricalRecords()
+    class Meta:
+        permissions = [
+                ("can_view_articulo", "Can view articulo"),
+                ("can_edit_articulo", "Can edit articulo"),
+            ]
 
 class Guia(BaseInformativo):
     steps =models.TextField(blank=True ,null=True, verbose_name='Pasos a seguir')
     aditional_resources = models.URLField(null=True, blank=True,verbose_name='Recursos adicionales')
     history = HistoricalRecords()
+    class Meta:
+        permissions = [
+                ("can_view_guia", "Can view guia"),
+                ("can_edit_guia", "Can edit guia"),
+            ]
 
 class ServicioInfo(BaseInformativo):
     features = models.TextField( verbose_name='Caracteristicas incluidas')
     exclusions = models.TextField( null=True, blank=True, verbose_name='Exclusiones')
     price = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True, verbose_name='Precio')
     history = HistoricalRecords()
+    class Meta:
+        permissions = [
+                ("can_view_servicioInfo", "Can view servicioInfo"),
+                ("can_edit_servicioInfo", "Can edit servicioInfo"),
+            ]
     
 class SeccionArticulo(models.Model):
     subtitle = models.CharField(max_length=200, verbose_name='Subtitulo')
@@ -30,6 +45,9 @@ class SeccionArticulo(models.Model):
     description = models.TextField(max_length=300, blank=True, null=True, verbose_name='observaciones')
     article = models.ForeignKey(Articulo, related_name='seccionArticulo', on_delete=models.CASCADE)
     history = HistoricalRecords()
-    
-    def __str__(self):
-        return self.title
+
+    class Meta:
+        permissions = [
+                ("can_view_deudo", "Can view deudo"),
+                ("can_edit_deudo", "Can edit deudo"),
+            ]
