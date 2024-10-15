@@ -33,21 +33,21 @@ class CeremoniaViewSet(viewsets.ModelViewSet):
     filterset_class = CeremoniaFilter
 
 class UserProfileViewSet(viewsets.ModelViewSet):
-    queryset = User.objects.all()
+    queryset = User.objects.all()  # Queryset de todos los usuarios
     serializer_class = UserProfileSerializer
     permission_classes = [IsAuthenticated]
 
     def retrieve(self, request, *args, **kwargs):
-        user = self.get_object()  # Obtiene el usuario autenticado
+        user = request.user  # Obtiene el usuario autenticado
         serializer = self.get_serializer(user)  # Serializa el usuario
         return Response(serializer.data)  # Devuelve los datos serializados
 
 class GroupViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Group.objects.all()
-    permission_classes = [IsAuthenticated]
+    serializer_class = GroupSerializer  # Asegúrate de definir el serializer
 
     def retrieve(self, request, *args, **kwargs):
-        group = self.get_object()
+        group = self.get_object()  # Obtiene el grupo por ID
         return Response({
             'id': group.id,
             'name': group.name  # Devuelve el nombre del grupo (rol)
