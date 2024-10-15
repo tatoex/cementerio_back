@@ -1,4 +1,4 @@
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Group
 from rest_framework import serializers
 from .models import Servicio, Ceremonia
 from tumba.serializers import TumbaSerializer
@@ -33,8 +33,13 @@ class ServicioSerializer(serializers.ModelSerializer):
         ]
 
 class UserProfileSerializer(serializers.ModelSerializer):
+    groups = GroupSerializer(many=True, read_only=True)  # Aquí se debe especificar many=True si es necesario
     class Meta:
-        model= User
-        fields =['id', 'username', 'first_name', 'last_name', 'email']
+        model = User
+        fields = '__all__'  # O especifica los campos que necesites
 
+class GroupSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Group
+        fields = '__all__'  # Campos expuestos
 

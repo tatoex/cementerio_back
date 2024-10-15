@@ -1,10 +1,10 @@
 from django_filters.rest_framework import DjangoFilterBackend
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Group
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from rest_framework import viewsets, status
-from .serializers import ServicioSerializer, CeremoniaSerializer, UserProfileSerializer
+from .serializers import ServicioSerializer, CeremoniaSerializer, UserProfileSerializer, GroupSerializer
 from .models import Servicio, Ceremonia
 from .filters import ServicioFilter, CeremoniaFilter
 from .utils import sincronizar_disponibilidad_tumba
@@ -37,7 +37,18 @@ class UserProfileViewSet(viewsets.ModelViewSet):
     serializer_class = UserProfileSerializer
     permission_classes = [IsAuthenticated]
 
-    def get_object(self):
-        user=request.user #obtener usuario autenticado
-        serializer=self.get_serializer(user)
-        return Response(serializer.data)
+    def retrieve(self, request, *args, **kwargs):
+        user = self.get_object()  # Obtiene el usuario autenticado
+        serializer = self.get_serializer(user)  # Serializa el usuario
+        return Response(serializer.data)  # Devuelve los datos serializados
+
+class GroupViewSet(viewsets.ReadOnlyModelViewSet):
+    queryset = Group.objects.all()
+    permission_classes = [IsAuthenticated]
+
+    def retrieve(self, request, *args, **kwargs):
+        group = self.get_object()
+        return Response({
+            'id': group.id,
+            'name': group.name  # Devuelve el nombre del grupo (rol)
+        })
