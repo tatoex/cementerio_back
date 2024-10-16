@@ -7,7 +7,7 @@ class ParroquiaSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class IglesiaSerializer(serializers.ModelSerializer):
-    parish = ParroquiaSerializer(read_only=True)
+    # parish = ParroquiaSerializer(read_only=True)
     class Meta:
         model = Iglesia
         fields = '__all__'

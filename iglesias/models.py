@@ -15,8 +15,8 @@ class Parroquia(BaseIglesia):
 class Iglesia(BaseIglesia):
     name=models.CharField(max_length=100, verbose_name='nombre')
     address = models.CharField(max_length=200, null=True, blank=True, verbose_name='Direccion')
-    latitude = models.DecimalField(max_digits=9, decimal_places=6, verbose_name='latitud')
-    longitude = models.DecimalField(max_digits=9, decimal_places=6, verbose_name='longitud')
+    latitude = models.DecimalField(max_digits=9, decimal_places=6, null=True, blank=True, verbose_name='latitud')
+    longitude = models.DecimalField(max_digits=9, decimal_places=6, null=True, blank=True, verbose_name='longitud')
     phone = models.CharField(max_length=15, null=True, blank=True, verbose_name='Telefono')
     email = models.EmailField(null=True, blank=True, verbose_name='Email')
     schedule = models.TextField(null=True, blank=True, verbose_name='Horario')
