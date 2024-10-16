@@ -1,7 +1,7 @@
 import django_filters
 
 from difunto.models import Difunto
-from servicio.models import Ceremonia
+from servicio.models import Servicio
 from .models import Obituario, Memoria, EtapasObituario
 
 class ObituarioFilter(django_filters.FilterSet):
@@ -29,7 +29,7 @@ class EtapasObituarioFilter(django_filters.FilterSet):
     stage_type = django_filters.ChoiceFilter(choices=EtapasObituario.ETAPAS_OBITUARIO_CHOICES)
     place = django_filters.CharFilter(lookup_expr='icontains')
     obituary = django_filters.ModelChoiceFilter(queryset=Obituario.objects.all())
-    ceremony = django_filters.ModelChoiceFilter(queryset=Ceremonia.objects.all())
+    ceremony = django_filters.ModelChoiceFilter(queryset=Servicio.objects.all())
 
     class Meta:
         model = EtapasObituario

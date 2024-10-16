@@ -1,5 +1,5 @@
 import django_filters
-from .models import DisponibleTumba, Lote, Tumba
+from .models import Lote, Tumba
 
 class TumbaFilter(django_filters.FilterSet):
     nicheNumber = django_filters.NumberFilter()
@@ -25,11 +25,3 @@ class LoteFilter(django_filters.FilterSet):
         model = Lote
         fields = ['blockName', 'typeblock', 'numbersblock', 'filas', 'columnas', 'limite']
 
-class DisponibleTumbaFilter(django_filters.FilterSet):
-    startDate = django_filters.DateFilter(field_name='startDate', lookup_expr='gte')  # Fecha mayor o igual a
-    endDate = django_filters.DateFilter(field_name='endDate', lookup_expr='lte')  # Fecha menor o igual a
-    numberTumba = django_filters.ModelChoiceFilter(queryset=Tumba.objects.all())  # Filtra por tumba específica
-
-    class Meta:
-        model = DisponibleTumba
-        fields = ['startDate', 'endDate', 'numberTumba']

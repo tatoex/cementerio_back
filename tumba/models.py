@@ -27,13 +27,3 @@ class Tumba (BaseModelTumba):
     history=HistoricalRecords()
     nameLote = models.ForeignKey(Lote, related_name='tumbaLote', on_delete=models.CASCADE) 
     
-
-
-# Clase Disponibilidad
-class DisponibleTumba (BaseModelTumba):
-    startDate = models.DateTimeField(verbose_name='inicio')
-    endDate = models.DateTimeField(verbose_name='vence')
-    history=HistoricalRecords()
-    numberTumba = models.ForeignKey(Tumba, related_name='disponibleTumba', on_delete=models.DO_NOTHING) 
-
-

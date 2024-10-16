@@ -1,8 +1,8 @@
 from rest_framework import viewsets
 from django_filters.rest_framework import DjangoFilterBackend
 from difunto.models import Deudo, Difunto
-from tumba.models import Tumba, Lote, DisponibleTumba
-from servicio.models import Servicio, Ceremonia
+from tumba.models import Tumba, Lote
+from servicio.models import Servicio
 from obituarios.models import Obituario, Memoria, EtapasObituario
 from informativos.models import Articulo, Guia, SeccionArticulo, ServicioInfo
 from iglesias.models import Parroquia, Iglesia, LinkRedSocial
@@ -12,9 +12,7 @@ from .serializers import (
     HistoricalDeudoSerializer,
     HistoricalTumbaSerializer,
     HistoricalLoteSerializer,
-    HistoricalDisponibleTumbaSerializer,
     HistoricalServicioSerializer,
-    HistoricalCeremoniaSerializer,
     HistoricalObituarioSerializer,
     HistoricalMemoriaSerializer,
     HistoricalEtapasObituarioSerializer,
@@ -31,9 +29,7 @@ from .filters import (
     HistoricalDeudoFilter,
     HistoricalTumbaFilter,
     HistoricalLoteFilter,
-    HistoricalDisponibleTumbaFilter,
     HistoricalServicioFilter,
-    HistoricalCeremoniaFilter,
     HistoricalObituarioFilter,
     HistoricalMemoriaFilter,
     HistoricalEtapasObituarioFilter,
@@ -78,14 +74,6 @@ class HistoricalLoteViewSet(HistoricalActionMixin, viewsets.ReadOnlyModelViewSet
     filter_backends = [DjangoFilterBackend]
     filterset_class = HistoricalLoteFilter
 
-class HistoricalDisponibleTumbaViewSet(HistoricalActionMixin, viewsets.ReadOnlyModelViewSet):
-    """viewset se encarga de manejar el historial del modelo Disponible, combinando funciones y filtros"""
-    serializer_class=HistoricalDisponibleTumbaSerializer
-    model= DisponibleTumba
-    model_name:"DisponibleTumba"
-    filter_backends = [DjangoFilterBackend]
-    filterset_class = HistoricalDisponibleTumbaFilter
-
 class HistoricalServicioViewSet(HistoricalActionMixin, viewsets.ReadOnlyModelViewSet):
     """viewset se encarga de manejar el historial del modelo Servicio, combinando funciones y filtros"""
     serializer_class=HistoricalServicioSerializer
@@ -93,14 +81,6 @@ class HistoricalServicioViewSet(HistoricalActionMixin, viewsets.ReadOnlyModelVie
     model_name:"Servicio"
     filter_backends = [DjangoFilterBackend]
     filterset_class = HistoricalServicioFilter
-
-class HistoricalCeremoniaViewSet(HistoricalActionMixin, viewsets.ReadOnlyModelViewSet):
-    """viewset se encarga de manejar el historial del modelo Ceremonia, combinando funciones y filtros"""
-    serializer_class=HistoricalCeremoniaSerializer
-    model= Ceremonia
-    model_name:"Ceremonia"
-    filter_backends = [DjangoFilterBackend]
-    filterset_class = HistoricalCeremoniaFilter
 
 class HistoricalObituarioViewSet(HistoricalActionMixin, viewsets.ReadOnlyModelViewSet):
     """viewset se encarga de manejar el historial del modelo Obituario, combinando funciones y filtros"""

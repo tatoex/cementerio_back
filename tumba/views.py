@@ -35,18 +35,18 @@ class DetailLoteView(RetrieveUpdateDestroyAPIView):
     #definir el queryset para traer los elementos
     queryset=Lote.objects.all()
 
-class ListDisponibleTumbasView(ListAPIView, CreateAPIView ):
-    allowed_method = ['GET','POST']
-    #para todos los metodos utilice el serializerclass
-    serializer_class=DisponibleTumbaSerializer
-    #definir el queryset para traer los elementos
-    queryset=DisponibleTumba.objects.all()
-class DetailDisponibleTumbaView(RetrieveUpdateDestroyAPIView):
-    allowed_method=['GET','PUT', 'DELETE']
-    #para todos los metodos utilice el serializerclass
-    serializer_class=DisponibleTumbaSerializer
-    #definir el queryset para traer los elementos
-    queryset=DisponibleTumba.objects.all()
+# class ListDisponibleTumbasView(ListAPIView, CreateAPIView ):
+#     allowed_method = ['GET','POST']
+#     #para todos los metodos utilice el serializerclass
+#     serializer_class=DisponibleTumbaSerializer
+#     #definir el queryset para traer los elementos
+#     queryset=DisponibleTumba.objects.all()
+# class DetailDisponibleTumbaView(RetrieveUpdateDestroyAPIView):
+#     allowed_method=['GET','PUT', 'DELETE']
+#     #para todos los metodos utilice el serializerclass
+#     serializer_class=DisponibleTumbaSerializer
+#     #definir el queryset para traer los elementos
+#     queryset=DisponibleTumba.objects.all()
 
 # clases APIview
 # class ListTumbasView(APIView):

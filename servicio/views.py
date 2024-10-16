@@ -22,18 +22,18 @@ class DetailServicioView(RetrieveUpdateDestroyAPIView):
     #definir el queryset para traer los elementos
     queryset=Servicio.objects.all()
 
-class ListCeremoniasView(ListAPIView, CreateAPIView):
-    allowed_method = ['GET','POST']
-    #para todos los metodos utilice el serializerclass
-    serializer_class=CeremoniaSerializer
-    #definir el queryset para traer los elementos
-    queryset=Ceremonia.objects.all()
-class DetailCeremoniaView(RetrieveUpdateDestroyAPIView):
-    allowed_method=['GET','PUT', 'DELETE']
-    #para todos los metodos utilice el serializerclass
-    serializer_class=CeremoniaSerializer
-    #definir el queryset para traer los elementos
-    queryset=Ceremonia.objects.all()
+# class ListCeremoniasView(ListAPIView, CreateAPIView):
+#     allowed_method = ['GET','POST']
+#     #para todos los metodos utilice el serializerclass
+#     serializer_class=CeremoniaSerializer
+#     #definir el queryset para traer los elementos
+#     queryset=Ceremonia.objects.all()
+# class DetailCeremoniaView(RetrieveUpdateDestroyAPIView):
+#     allowed_method=['GET','PUT', 'DELETE']
+#     #para todos los metodos utilice el serializerclass
+#     serializer_class=CeremoniaSerializer
+#     #definir el queryset para traer los elementos
+#     queryset=Ceremonia.objects.all()
 
 # clases APIView
 # class ListServiciosView(APIView):

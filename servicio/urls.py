@@ -1,13 +1,12 @@
 from django.urls import path
 from rest_framework.routers import DefaultRouter
 # from .views import ListServiciosView, DetailServicioView, ListCeremoniasView, DetailCeremoniaView
-from .viewsets import ServicioViewSet, CeremoniaViewSet, UserProfileViewSet, GroupViewSet
+from .viewsets import ServicioViewSet, UserProfileViewSet, GroupViewSet
 
 router=DefaultRouter()
-router.register('servicio', ServicioViewSet)
-router.register('ceremonia', CeremoniaViewSet)
-router.register('profile', UserProfileViewSet)
-router.register('group', GroupViewSet)
+router.register(r'servicio', ServicioViewSet)
+router.register(r'profile', UserProfileViewSet)
+router.register(r'group', GroupViewSet)
 
 urlpatterns = router.urls
 

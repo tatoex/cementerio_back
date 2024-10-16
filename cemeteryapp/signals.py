@@ -14,7 +14,6 @@ def create_user_groups(sender, **kwargs):
     difunto_permissions = Permission.objects.filter(content_type__app_lable='difuntos')
     deudo_permissions = Permission.objects.filter(content_type__app_lable='deudos')
         # servicio
-    ceremonia_permissions = Permission.objects.filter(content_type__app_lable='ceremonia')
     servicio_permissions = Permission.objects.filter(content_type__app_lable='servicio')
         # iglesia
     iglesia_permissions = Permission.objects.filter(content_type__app_lable='iglesia')
@@ -31,7 +30,7 @@ def create_user_groups(sender, **kwargs):
     etapasObituario_permissions = Permission.objects.filter(content_type__app_lable='etapasObituario')
 
     secretaria_group.permissions.add(*difunto_permissions, *deudo_permissions)
-    secretaria_group.permissions.add( *ceremonia_permissions, *servicio_permissions)
+    secretaria_group.permissions.add( *servicio_permissions)
     secretaria_group.permissions.add( *iglesia_permissions, *parroquia_permissions, *linkRedSocia_permissions)
     secretaria_group.permissions.add( *articulo_permissions, *guia_permissions, *servicioInfo_permissions, *seccionArticulo_permissions)
     secretaria_group.permissions.add( *obituario_permissions, *memoria_permissions, *etapasObituario_permissions)

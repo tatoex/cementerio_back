@@ -2,15 +2,16 @@ from django.db import models
 from simple_history.models import HistoricalRecords
 from .base import BaseObituario
 from difunto.models import Difunto
-from servicio.models import Ceremonia
+from servicio.models import Servicio
 
 # Create your models here.
 class Obituario(BaseObituario):
-    obituary_detail = models.TextField(verbose_name='Detalle del difunto')
-    cementery = models.CharField(max_length=200, null=True, blank=True, verbose_name='lugar de la ceremonia')
+    obituary_detail = models.TextField(verbose_name='Detalle del obituario')
+    cementery = models.CharField(max_length=200, null=True, blank=True, verbose_name='cemeterio')
     place = models.CharField(max_length=200, null=True, blank=True, verbose_name='lugar de la ceremonia')
-    history = HistoricalRecords()
     deceased = models.OneToOneField(Difunto, related_name='obituarioDifunto', on_delete=models.CASCADE)
+    history = HistoricalRecords()
+    
     class Meta:
         permissions = [
                 ("can_view_obituario", "Can view obituario"),
@@ -47,7 +48,7 @@ class EtapasObituario(BaseObituario):
     place = models.CharField(max_length=200, null=True, blank=True, verbose_name='lugar de la ceremonia')
     history = HistoricalRecords()
     obituary = models.ForeignKey(Obituario, related_name='etapasObituario', on_delete=models.CASCADE)
-    ceremony = models.ForeignKey(Ceremonia, related_name='etapasCeremonia', on_delete=models.CASCADE)
+    ceremony = models.ForeignKey(Servicio, related_name='etapasCeremonia', on_delete=models.CASCADE)
     class Meta:
         permissions = [
                 ("can_view_etapasObituario", "Can view etapasObituario"),

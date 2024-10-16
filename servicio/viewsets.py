@@ -4,10 +4,10 @@ from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from rest_framework import viewsets, status
-from .serializers import ServicioSerializer, CeremoniaSerializer, UserProfileSerializer, GroupSerializer
-from .models import Servicio, Ceremonia
-from .filters import ServicioFilter, CeremoniaFilter
-from .utils import sincronizar_disponibilidad_tumba
+from .serializers import ServicioSerializer, UserProfileSerializer, GroupSerializer
+from .models import Servicio
+from .filters import ServicioFilter
+
 
 class ServicioViewSet(viewsets.ModelViewSet):
     #para todos los metodos utilice el serializerclass
@@ -16,21 +16,6 @@ class ServicioViewSet(viewsets.ModelViewSet):
     queryset=Servicio.objects.all()
     filter_backends = [DjangoFilterBackend]
     filterset_class = ServicioFilter
-    
-    @action(methods=['POST'], detail=True, url_path='sincronizar-disponibilidad')
-    def sincronizar_disponibilidad(self, request, pk=None):
-        """accion para sincronizar las fechas de Disponibilidad de la tumba basado en funcion a servicio"""
-        servicio=self.get_object()
-        sincronizar_disponibilidad_tumba(servicio)
-        return Response({'status':'Fechas sincronizadas :)'}, status=status.HTTP_200_OK)
-
-class CeremoniaViewSet(viewsets.ModelViewSet):
-    #para todos los metodos utilice el serializerclass
-    serializer_class=CeremoniaSerializer
-    #definir el queryset para traer los elementos
-    queryset=Ceremonia.objects.all()
-    filter_backends = [DjangoFilterBackend]
-    filterset_class = CeremoniaFilter
 
 class UserProfileViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()  # Queryset de todos los usuarios

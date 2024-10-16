@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from difunto.models import Difunto, Deudo
-from tumba.models import Tumba, Lote, DisponibleTumba
-from servicio.models import Servicio, Ceremonia
+from tumba.models import Tumba, Lote
+from servicio.models import Servicio
 from obituarios.models import Obituario, Memoria, EtapasObituario
 from informativos.models import Articulo, Guia, ServicioInfo, SeccionArticulo
 from iglesias.models import Parroquia, Iglesia, LinkRedSocial
@@ -30,23 +30,13 @@ class HistoricalLoteSerializer(serializers.ModelSerializer):
         model=Lote.history.model
         fields=['history_id','id','blockName','typeblock','numbersblock','filas','columnas','limite','description','history_date','history_type','history_user']
 
-class HistoricalDisponibleTumbaSerializer(serializers.ModelSerializer):
-    history_user=serializers.StringRelatedField()
-    class Meta:
-        model=DisponibleTumba.history.model
-        fields=['history_id','id','startDate','endDate','description','history_date','history_type','history_user']
-
 class HistoricalServicioSerializer(serializers.ModelSerializer):
     history_user=serializers.StringRelatedField()
     class Meta:
         model=Servicio.history.model
-        fields=['history_id','id','startDate','endDate','description','history_date','history_type','history_user']
+        fields=['history_id','id','ceremony','startDate','endDate','description','history_date','history_type','history_user']
 
-class HistoricalCeremoniaSerializer(serializers.ModelSerializer):
-    history_user=serializers.StringRelatedField()
-    class Meta:
-        model=Ceremonia.history.model
-        fields=['history_id','id','names','date','description','history_date','history_type','history_user']
+
 
 class HistoricalObituarioSerializer(serializers.ModelSerializer):
     history_user=serializers.StringRelatedField()

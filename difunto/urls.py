@@ -4,8 +4,8 @@ from rest_framework.routers import DefaultRouter
 from.viewsets import DifuntoViewSet, DeudoViewSet
 
 router=DefaultRouter()
-router.register('difuntos', DifuntoViewSet)
-router.register('deudos', DeudoViewSet)
+router.register(r'difunto', DifuntoViewSet)
+router.register(r'deudo', DeudoViewSet)
 
 urlpatterns = router.urls
 

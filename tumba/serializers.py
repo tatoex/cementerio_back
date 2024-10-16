@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Lote, Tumba, DisponibleTumba
+from .models import Lote, Tumba
 
 class LoteSerializer(serializers.ModelSerializer):
     class Meta:
@@ -31,9 +31,3 @@ class TumbaSerializer(serializers.ModelSerializer):
         ]
     
 
-class DisponibleTumbaSerializer(serializers.ModelSerializer):
-    numberTumba =TumbaSerializer(read_only=True)
-    class Meta:
-        model = DisponibleTumba
-        fields = '__all__'
-        

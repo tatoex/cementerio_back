@@ -4,9 +4,7 @@ from .viewsets import (
     HistoricalDeudoViewSet,
     HistoricalLoteViewSet,
     HistoricalTumbaViewSet,
-    HistoricalDisponibleTumbaViewSet,
     HistoricalServicioViewSet,
-    HistoricalCeremoniaViewSet,
     HistoricalArticuloViewSet,
     HistoricalSeccionArticuloViewSet,
     HistoricalServicioInfoViewSet,
@@ -23,9 +21,7 @@ router.register(r'difunto-history',HistoricalDifuntoViewSet, basename='difunto-h
 router.register(r'deudo-history',HistoricalDeudoViewSet, basename='deudo-history')
 router.register(r'lote-history',HistoricalLoteViewSet, basename='lote-history')
 router.register(r'tumba-history',HistoricalTumbaViewSet, basename='tumba-history')
-router.register(r'disponibilidad-history',HistoricalDisponibleTumbaViewSet, basename='disponibilidad-history')
 router.register(r'servicio-history',HistoricalServicioViewSet, basename='servicio-history')
-router.register(r'ceremonia-history',HistoricalCeremoniaViewSet, basename='ceremonia-history')
 router.register(r'articulo-history',HistoricalArticuloViewSet, basename='articulo-history')
 router.register(r'seccion-history',HistoricalSeccionArticuloViewSet, basename='seccion-history')
 router.register(r'info-history',HistoricalServicioInfoViewSet, basename='info-history')

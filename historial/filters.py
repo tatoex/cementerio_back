@@ -1,13 +1,13 @@
 import django_filters
 from difunto.models import Difunto, Deudo
-from tumba.models import Tumba, Lote, DisponibleTumba
-from servicio.models import Servicio, Ceremonia
+from tumba.models import Tumba, Lote
+from servicio.models import Servicio
 from obituarios.models import Obituario, Memoria, EtapasObituario
 from iglesias.models import Parroquia, Iglesia, LinkRedSocial
 from informativos.models import Articulo, Guia, ServicioInfo, SeccionArticulo
 from difunto.filters import DifuntoFilter, DeudoFilter
-from tumba.filters import TumbaFilter, LoteFilter, DisponibleTumbaFilter
-from servicio.filters import ServicioFilter, CeremoniaFilter
+from tumba.filters import TumbaFilter, LoteFilter
+from servicio.filters import ServicioFilter
 from obituarios.filters import ObituarioFilter, MemoriaFilter, EtapasObituarioFilter
 from iglesias.filters import ParroquiaFilter, IglesiaFilter, LinkRedSocialFilter
 from informativos.filters import ArticuloFilter, GuiaFilter, ServicioInfoFilter, SeccionArticuloFilter
@@ -56,14 +56,6 @@ class HistoricalLoteFilter(LoteFilter, HistoricalFilter):
         model = Lote
         fields = HistoricalFilter.Meta.fields + LoteFilter.Meta.fields
 
-# Filtro específico para DisponibleTumba en el historial
-class HistoricalDisponibleTumbaFilter(DisponibleTumbaFilter, HistoricalFilter):
-    """Filtro para el historial del modelo DisponibleTumba, combinando los filtros de DisponibleTumba y los generales"""
-
-    class Meta(DisponibleTumbaFilter.Meta, HistoricalFilter.Meta):
-        model = DisponibleTumba
-        fields = HistoricalFilter.Meta.fields + DisponibleTumbaFilter.Meta.fields
-
 # Filtro específico para Servicio en el historial
 class HistoricalServicioFilter(ServicioFilter, HistoricalFilter):
     """Filtro para el historial del modelo Servicio, combinando los filtros de Servicio y los generales"""
@@ -72,13 +64,6 @@ class HistoricalServicioFilter(ServicioFilter, HistoricalFilter):
         model = Servicio
         fields = HistoricalFilter.Meta.fields + ServicioFilter.Meta.fields
 
-# Filtro específico para Ceremonia en el historial
-class HistoricalCeremoniaFilter(CeremoniaFilter, HistoricalFilter):
-    """Filtro para el historial del modelo Ceremonia, combinando los filtros de Ceremonia y los generales"""
-
-    class Meta(CeremoniaFilter.Meta, HistoricalFilter.Meta):
-        model = Ceremonia
-        fields = HistoricalFilter.Meta.fields + CeremoniaFilter.Meta.fields
 
 # Filtro específico para Obituario en el historial
 class HistoricalObituarioFilter(ObituarioFilter, HistoricalFilter):

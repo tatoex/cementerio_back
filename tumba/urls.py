@@ -1,12 +1,12 @@
 from django.urls import path
 from rest_framework.routers import DefaultRouter
 # from .views import ListTumbasView, DetailTumbaView, ListLotesView, DetailLoteView, ListDisponibleTumbasView, DetailDisponibleTumbaView
-from .viewsets import TumbaViewSet, LoteViewSet, DisponibleTumbaViewSet
+from .viewsets import TumbaViewSet, LoteViewSet
 
 router=DefaultRouter()
-router.register('tumba', TumbaViewSet)
-router.register('lote', LoteViewSet)
-router.register('disponibilidad', DisponibleTumbaViewSet)
+router.register(r'tumba', TumbaViewSet)
+router.register(r'lote', LoteViewSet)
+
 
 urlpatterns = router.urls
 # urlpatterns = [
