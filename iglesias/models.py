@@ -21,7 +21,7 @@ class Iglesia(BaseIglesia):
     email = models.EmailField(null=True, blank=True, verbose_name='Email')
     schedule = models.TextField(null=True, blank=True, verbose_name='Horario')
     priest = models.CharField(max_length=100, null=True, blank=True, verbose_name='Sacerdote')
-    logo=models.ImageField(upload_to='logo/', null=True, blank=True, verbose_name='Logo')
+    sector = models.TextField(null=True, blank=True, verbose_name='Sector')
     history = HistoricalRecords()
     parish = models.ForeignKey(Parroquia, related_name='iglesias', on_delete=models.CASCADE)
     class Meta:
