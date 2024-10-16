@@ -44,7 +44,9 @@ class LinkRedSocial(BaseIglesia):
         ('Instagram','Instagram'),
         ('Youtube','Youtube'),
     ]
-    stage_type = models.CharField( max_length=50, choices=PLATAFORMAS_CHOICES, verbose_name='Etapas de las ceremonias')
+    stage_type = models.CharField( max_length=50, choices=PLATAFORMAS_CHOICES, verbose_name='Plataforma')
+    url = models.URLField(max_length=255,null=True, blank=True, verbose_name='URL de la red social')
+    iglesia = models.ForeignKey(Iglesia, on_delete=models.CASCADE, related_name='redes_sociales', null=True, blank=True)
     history = HistoricalRecords()
     class Meta:
         permissions = [

@@ -234,4 +234,6 @@ ordenar_requirements.sh
 lote.json
 cargarApi_tablas.py
 cargarJson.py
+*.jpg
+*.png
 # End of https://www.toptal.com/developers/gitignore/api/windows,macos,django
