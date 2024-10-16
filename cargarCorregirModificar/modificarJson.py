@@ -2,14 +2,14 @@ import requests
 import json
 
 # Ruta del archivo JSON
-json_file_path = "/home/renato/tesis/back/cementerio_back/cargarCorregirModificar/difunto_data_final.json"
+json_file_path = "/home/renato/tesis/back/cementerio_back/cargarCorregirModificar/updated_tumba.json"
 
 # Leer el archivo JSON
 with open(json_file_path, 'r') as file:
     json_data = json.load(file)
 
 # URL base de la API
-base_url = "http://127.0.0.1:8000/api/difuntos/"
+base_url = "http://127.0.0.1:8000/api/tumba/"
 
 # Iterar sobre cada objeto JSON y actualizar en la base de datos
 for index, data in enumerate(json_data):

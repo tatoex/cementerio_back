@@ -16,6 +16,19 @@ class ServicioViewSet(viewsets.ModelViewSet):
     queryset=Servicio.objects.all()
     filter_backends = [DjangoFilterBackend]
     filterset_class = ServicioFilter
+    @action(methods=['POST'], detail=True, url_path='set-on-paid')
+    def set_on_paid(self, request, pk):
+        servicio = self.get_object()
+        servicio.is_paid=True
+        servicio.save()
+        return Response ({"status":"Esta cancelado"})
+
+    @action(methods=['POST'], detail=True, url_path='set-off-paid')
+    def set_off_paid(self, request, pk):
+        servicio = self.get_object()
+        servicio.is_paid=False
+        servicio.save()
+        return Response ({"status":"No esta cancelado"})
 
 class UserProfileViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()  # Queryset de todos los usuarios

@@ -86,16 +86,16 @@ class HistoricalParroquiaSerializer(serializers.ModelSerializer):
     history_user=serializers.StringRelatedField()
     class Meta:
         model=Parroquia.history.model
-        fields=['history_id','id','name','churches_number','description','image','history_date','history_type','history_user']
+        fields=['history_id','id','name','churches_number','image','history_date','history_type','history_user']
 
 class HistoricalIglesiaSerializer(serializers.ModelSerializer):
     history_user=serializers.StringRelatedField()
     class Meta:
         model=Iglesia.history.model
-        fields=['history_id','id','name','address','latitude','longitude','phone','email','schedule','priest','logo','description','image','history_date','history_type','history_user']
+        fields=['history_id','id','name','address','latitude','longitude','phone','email','schedule','priest','image','history_date','history_type','history_user']
 
 class HistoricalLinkRedSocialSerializer(serializers.ModelSerializer):
     history_user=serializers.StringRelatedField()
     class Meta:
         model=LinkRedSocial.history.model
-        fields=['history_id','id','stage_type','description','image','history_date','history_type','history_user']
+        fields=['history_id','id','stage_type','image','history_date','history_type','history_user']

@@ -23,6 +23,18 @@ class TumbaViewSet(viewsets.ModelViewSet):
     #         return Response({'status':'La tumba esta disponible'})
     #     else:
     #         return Response({'status':'La tumba no esta disponible'})
+    @action(methods=['POST'], detail=True, url_path='set-on-available')
+    def set_on_available(self, request, pk):
+        tumba = self.get_object()
+        tumba.available=True
+        tumba.save()
+        return Response ({"status":"El espacio esta disponible"})
+    @action(methods=['POST'], detail=True, url_path='set-off-available')
+    def set_off_available(self, request, pk):
+        tumba = self.get_object()
+        tumba.available=False
+        tumba.save()
+        return Response ({"status":"El espacio No esta disponible"})
         
 class LoteViewSet(viewsets.ModelViewSet):
     #para todos los metodos utilice el serializerclass

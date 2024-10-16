@@ -5,6 +5,9 @@ class ServicioConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
     name = 'servicio'
 
+    # def ready(self):
+    #     import servicio.signals  # Aquí activas las señales
+
 
 
 
