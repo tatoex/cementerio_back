@@ -3,6 +3,12 @@ from simple_history.models import HistoricalRecords
 from .base import BaseObituario
 from difunto.models import Difunto
 from servicio.models import Servicio
+from django.core.exceptions import ValidationError
+
+def validar_tamano_imagen(image):
+    max_tamano = 2 * 1024 * 1024  # Limita a 2MB
+    if image.size > max_tamano:
+        raise ValidationError("El tamaño máximo permitido es 2MB.")
 
 # Create your models here.
 class Obituario(BaseObituario):
@@ -24,7 +30,7 @@ class Memoria(BaseObituario):
     names = models.CharField(max_length=200, verbose_name='Nombre autor')
     relationship = models.CharField(max_length=200, null=True, blank=True, verbose_name='Relacion con el difunto')
     text = models.TextField(verbose_name='Recuerdo')
-    image = models.ImageField(upload_to='memories/', null=True, blank=True, verbose_name='Imagen opcional')
+    image = models.ImageField(upload_to='memories/', null=True, blank=True, validators=[validar_tamano_imagen], verbose_name='Imagen opcional')
     history = HistoricalRecords()
     obituary = models.ForeignKey(Obituario, related_name='memoriaObituario', on_delete=models.CASCADE)
     class Meta:
