@@ -42,7 +42,7 @@ class HistoricalObituarioSerializer(serializers.ModelSerializer):
     history_user=serializers.StringRelatedField()
     class Meta:
         model=Obituario.history.model
-        fields=['history_id','id','obituary_detail','cementery','place','date','description','history_date','history_type','history_user']
+        fields=['history_id','id','obituary_detail','cementery','place','name','date','description','history_date','history_type','history_user']
 
 
 class HistoricalMemoriaSerializer(serializers.ModelSerializer):

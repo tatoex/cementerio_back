@@ -15,6 +15,7 @@ class Obituario(BaseObituario):
     obituary_detail = models.TextField(verbose_name='Detalle del obituario')
     cementery = models.CharField(max_length=200, null=True, blank=True, verbose_name='cemeterio')
     place = models.CharField(max_length=200, null=True, blank=True, verbose_name='lugar de la ceremonia')
+    name = models.CharField(max_length=200, null=True, blank=True, verbose_name='homenajeado')
     deceased = models.OneToOneField(Difunto, related_name='obituarioDifunto', on_delete=models.CASCADE)
     history = HistoricalRecords()
     
