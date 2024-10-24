@@ -98,4 +98,4 @@ class HistoricalLinkRedSocialSerializer(serializers.ModelSerializer):
     history_user=serializers.StringRelatedField()
     class Meta:
         model=LinkRedSocial.history.model
-        fields=['history_id','id','stage_type','image','history_date','history_type','history_user']
+        fields=['history_id','id','stage_type','history_date','history_type','history_user']

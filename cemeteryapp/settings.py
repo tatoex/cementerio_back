@@ -35,7 +35,29 @@ SECRET_KEY = "django-insecure-qda&dno%ojmp6jaa&(-ti3q20d#mqzs&f5bi6_t*c7lhuf5t*s
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
+CORS_ALLOWED_ORIGINS = [
+    'http://192.168.100.4',  # IP de tu Mac
+]
+CORS_ORIGIN_WHITELIST = [
+    'http://localhost:4200',  # URL del frontend de Angular
+]
+CORS_ALLOW_METHODS = [
+    'GET',
+    'POST',
+    'PUT',
+    'PATCH',
+    'DELETE',
+    'OPTIONS'
+]
+CORS_ALLOW_HEADERS = [
+    'Authorization',
+    'Content-Type',
+    'X-CSRFToken',  # Si estás usando protección CSRF
+    'X-Requested-With',
+    'Accept',
+]
+CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOW_CREDENTIALS = True
 
 # Application definition
 
@@ -163,10 +185,6 @@ REST_FRAMEWORK = {
         'django_filters.rest_framework.DjangoFilterBackend',
     ),
 }
-CORS_ALLOWED_ORIGINS = [
-    'http://192.168.100.4',  # IP de tu Mac
-]
-CORS_ALLOW_ALL_ORIGINS = True
 
 
 SPECTACULAR_SETTINGS = {

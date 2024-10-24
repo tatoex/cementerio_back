@@ -37,7 +37,7 @@ class Iglesia(BaseIglesia):
             return f"https://www.google.com/maps?q={self.latitude},{self.longitude}"
         return None
 
-class LinkRedSocial(BaseIglesia):
+class LinkRedSocial(models.Model):
     PLATAFORMAS_CHOICES = [
         ('Twitter','Twitter'),
         ('Facebook','Facebook'),
@@ -46,6 +46,8 @@ class LinkRedSocial(BaseIglesia):
     ]
     stage_type = models.CharField( max_length=50, choices=PLATAFORMAS_CHOICES, verbose_name='Plataforma')
     url = models.URLField(max_length=255,null=True, blank=True, verbose_name='URL de la red social')
+    loadDate = models.DateTimeField(auto_now_add=True, verbose_name='Creacion')
+    updateDate = models.DateTimeField(auto_now=True, verbose_name='Actualizacion')
     iglesia = models.ForeignKey(Iglesia, on_delete=models.CASCADE, related_name='redes_sociales', null=True, blank=True)
     history = HistoricalRecords()
     class Meta:
