@@ -16,23 +16,34 @@ class DeudoSerializer(serializers.ModelSerializer):
             'tipo',          # Campo del deudo
             'description',   # Campo del deudo
         ]
-
-     
-     
     
 class DifuntoSerializer(serializers.ModelSerializer):
-    tumba = TumbaSerializer(read_only=True)
-    deudo = DeudoSerializer(read_only=True)
+    tumba_ob = TumbaSerializer(source='tumba', read_only=True)
+    deudo_ob = DeudoSerializer(source='deudo', read_only=True)
+
     class Meta:
         model = Difunto
         fields = [
-            'id',
-            'names',         # Campo del difunto
-            'last_names',    # Campo del difunto
-            'idNumber',      # Campo del difunto
-            'requestNumber', # Campo del difunto
-            'description',   # Campo del difunto
-            'tumba',         # Objeto relacionado Tumba
-            'deudo',         # Objeto relacionado Deudo
+            'id', 
+            'names', 
+            'last_names', 
+            'idNumber', 
+            'requestNumber', 
+            'description', 
+            'tumba',       # ID de tumba
+            'tumba_ob',    # Objeto tumba completo
+            'deudo',       # ID de deudo
+            'deudo_ob'     # Objeto deudo completo
         ]
-    
+        extra_kwargs = {
+            'tumba': {'required': False},
+            'deudo': {'required': True},
+        }
+
+    def to_representation(self, instance):
+        representation = super().to_representation(instance)
+        request = self.context.get('request')
+        if request and request.method != 'GET':
+            representation.pop('tumba_ob', None)
+            representation.pop('deudo_ob', None)
+        return representation
