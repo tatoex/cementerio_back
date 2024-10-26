@@ -1,16 +1,25 @@
 from rest_framework import viewsets
+from rest_framework.pagination import PageNumberPagination
 from django_filters.rest_framework import DjangoFilterBackend
 from .serializers import DifuntoSerializer, DeudoSerializer
 from .models import Difunto, Deudo
 from .filters import DifuntoFilter, DeudoFilter
+
+
+class DifuntoPagination(PageNumberPagination):
+    page_size = 17  # Número de registros por página (puedes ajustar este valor)
+    page_size_query_param = 'page_size'
+    max_page_size = 100
 
 class DifuntoViewSet(viewsets.ModelViewSet):
     #para todos los metodos utilice el serializerclass
     serializer_class=DifuntoSerializer
     #definir el queryset para traer los elementos
     queryset=Difunto.objects.all()
+    pagination_class = DifuntoPagination 
     filter_backends = [DjangoFilterBackend]
     filterset_class = DifuntoFilter
+    
 
     
 
@@ -19,5 +28,6 @@ class DeudoViewSet(viewsets.ModelViewSet):
     serializer_class=DeudoSerializer
     #definir el queryset para traer los elementos
     queryset=Deudo.objects.all()
+    pagination_class = DifuntoPagination
     filter_backends = [DjangoFilterBackend]
     filterset_class = DeudoFilter
