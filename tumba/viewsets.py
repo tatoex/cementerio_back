@@ -1,10 +1,12 @@
 from rest_framework import viewsets
 from rest_framework.decorators import action
 from rest_framework.response import Response
+from rest_framework.pagination import PageNumberPagination
 from django_filters.rest_framework import DjangoFilterBackend
 from .serializers import TumbaSerializer, LoteSerializer
 from .models import Tumba, Lote
 from .filters import TumbaFilter, LoteFilter
+
 
 
 
@@ -41,7 +43,13 @@ class LoteViewSet(viewsets.ModelViewSet):
     serializer_class=LoteSerializer
     #definir el queryset para traer los elementos
     queryset=Lote.objects.all()
+     # Agregamos el backend de filtros y el filtro correspondiente
     filter_backends = [DjangoFilterBackend]
     filterset_class = LoteFilter
 
 
+class PagionacionGrafica(PageNumberPagination):
+    page_size_query_param = 'page_size'
+    max_page_size = 105
+
+# ViewSet de solo lectura para Tumba

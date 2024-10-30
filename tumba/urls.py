@@ -1,14 +1,17 @@
 from django.urls import path
 from rest_framework.routers import DefaultRouter
-# from .views import ListTumbasView, DetailTumbaView, ListLotesView, DetailLoteView, ListDisponibleTumbasView, DetailDisponibleTumbaView
-from .viewsets import TumbaViewSet, LoteViewSet
+from .viewsets import TumbaViewSet, TumbaGraficaViewSet, LoteViewSet, LoteGraficaViewSet
 
-router=DefaultRouter()
-router.register(r'tumba', TumbaViewSet)
-router.register(r'lote', LoteViewSet)
+
+router = DefaultRouter()
+router.register(r'tumba', TumbaViewSet, basename='tumba')
+router.register(r'lote', LoteViewSet, basename='lote')
+
 
 
 urlpatterns = router.urls
+# from .views import ListTumbasView, DetailTumbaView, ListLotesView, DetailLoteView, ListDisponibleTumbasView, DetailDisponibleTumbaView
+
 # urlpatterns = [
 #     path('tumbas', ListTumbasView.as_view()),
 #     path('tumbas/<int:pk>/', DetailTumbaView.as_view()),
