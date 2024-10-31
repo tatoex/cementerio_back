@@ -14,7 +14,7 @@ class HistoricalActionMixin:
         """
 
         object_id=self.request.query_params.get(f'{self.model._meta.model_name.lower()}_id', None)
-        limit=int(self.request.query_params.get(limit, 5))
+        limit=int(self.request.query_params.get('limit', 5))
         if not object_id:
             return Response({"error":"Debe proporcionar la ID del objeto"}, status=status.HTTP_400_BAD_REQUEST)
         try:
@@ -34,9 +34,9 @@ class HistoricalActionMixin:
         - attribute: (opcional) Atributoespecifico a comparar, usa 'all' para comparar todos los atributos.
         - limit: (opcional) Numero de versiones a considerar (por defecto 5).
         """
-        object_id=self.request.query_params.get(f'{self.model._meta.model_name.lower()}_id', None)
+        object_id = self.request.query_params.get('object_id', None)
         attribute=self.request.query_params.get('attribute', 'all')
-        limit=int(self.request.query_params.get(limit, 5))
+        limit = int(self.request.query_params.get('limit', 5))
 
         if not object_id:
             return Response({"error":"Debe proporcionar la ID del objeto"}, status=status.HTTP_400_BAD_REQUEST)
@@ -60,11 +60,10 @@ class HistoricalActionMixin:
             return Response({"error":"Debe proporcionar la ID del objeto"}, status=status.HTTP_400_BAD_REQUEST)
         try:
             # obtener la version historica
-            version=self.model.histry.get(hitory_id=version_id)
+            version = self.model.history.get(history_id=version_id)
             # restauramos el objeto a la version anterior
             version.instance.save()
         except self.model.history.model.DoesNotExist:
-            return Response({"error":"La version especifica no existe"}, status=status.HTTP_404_NOT_FOUND)
-       
-        return Response({"mensaje":"Version restaurada exitosamente"}, status=status.HTTP_200_OK)
+            return Response({"error": "La versión especificada no existe"}, status=status.HTTP_404_NOT_FOUND)
     
+        return Response({"mensaje": "Versión restaurada exitosamente"}, status=status.HTTP_200_OK)
