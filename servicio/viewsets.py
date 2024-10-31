@@ -18,7 +18,7 @@ class ServicioViewSet(viewsets.ModelViewSet):
     #para todos los metodos utilice el serializerclass
     serializer_class=ServicioSerializer
     #definir el queryset para traer los elementos
-    queryset=Servicio.objects.all()
+    queryset=Servicio.objects.all().order_by('startDate')
     filter_backends = [DjangoFilterBackend]
     filterset_class = ServicioFilter
     pagination_class = PagionacionServicio

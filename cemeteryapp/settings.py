@@ -33,6 +33,9 @@ SECRET_KEY = "django-insecure-qda&dno%ojmp6jaa&(-ti3q20d#mqzs&f5bi6_t*c7lhuf5t*s
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+CSRF_COOKIE_NAME = "csrftoken"  # Nombre de la cookie CSRF
+CSRF_COOKIE_HTTPONLY = False      # Si es True, la cookie no estará disponible a través de JavaScript
+CSRF_COOKIE_SECURE = True         # Si es True, la cookie solo se enviará a través de HTTPS
 
 ALLOWED_HOSTS = []
 CORS_ALLOWED_ORIGINS = [
@@ -98,7 +101,7 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "simple_history.middleware.HistoryRequestMiddleware",
-    'corsheaders.middleware.CorsMiddleware',
+    "corsheaders.middleware.CorsMiddleware",
 ]
 
 ROOT_URLCONF = "cemeteryapp.urls"
