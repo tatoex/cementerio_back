@@ -51,7 +51,7 @@ class EtapasObituario(BaseObituario):
         ('Lectura_recuerdos','Lectura de recuerdos'),
         ('Celebracion_vida','Celebración de vida'),
     ]
-    stage_type = models.CharField( max_length=100, choices=ETAPAS_OBITUARIO_CHOICES, verbose_name='Etapas de las ceremonias')
+    stage_ceremony = models.CharField( max_length=100, choices=ETAPAS_OBITUARIO_CHOICES, verbose_name='Etapas de las ceremonias')
     place = models.CharField(max_length=200, null=True, blank=True, verbose_name='lugar de la ceremonia')
     history = HistoricalRecords()
     obituary = models.ForeignKey(Obituario, related_name='etapasObituario', on_delete=models.CASCADE)
@@ -62,4 +62,4 @@ class EtapasObituario(BaseObituario):
                 ("can_edit_etapasObituario", "Can edit etapasObituario"),
             ]
     def __str__(self):
-        return f"{self.stage_type} en {self.place} para {self.obituary.deceased.names} {self.obituary.deceased.last_names}"
+        return f"{self.stage_ceremony} en {self.place} para {self.obituary.deceased.names} {self.obituary.deceased.last_names}"

@@ -1,6 +1,6 @@
 import django_filters
 
-from difunto.models import Deudo, Difunto
+from difunto.models import  Difunto
 from tumba.models import Tumba
 from .models import Servicio
 
@@ -11,10 +11,10 @@ class ServicioFilter(django_filters.FilterSet):
     ceremony = django_filters.ChoiceFilter(choices=Servicio.TIPO_CEREMONIA_CHOICES)
     numberTomb = django_filters.ModelChoiceFilter(queryset=Tumba.objects.all())
     deceased = django_filters.ModelChoiceFilter(queryset=Difunto.objects.all())
-    deudo = django_filters.ModelChoiceFilter(queryset=Deudo.objects.all())
+
     
 
     class Meta:
         model = Servicio
-        fields = ['startDate', 'endDate','ceremony', 'numberTomb', 'deceased', 'deudo']
+        fields = ['startDate', 'endDate','ceremony', 'numberTomb', 'deceased']
         

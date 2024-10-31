@@ -1,11 +1,13 @@
 from django.urls import path
 from rest_framework.routers import DefaultRouter
 # from .views import ListDifuntosView, DetailDifuntoView, ListDeudosView, DetailDeudoView
-from.viewsets import DifuntoViewSet, DeudoViewSet
+from.viewsets import DifuntoViewSet, DeudoViewSet, DifuntoReadViewSet, DeudoReadViewSet
 
 router=DefaultRouter()
-router.register(r'difunto', DifuntoViewSet)
-router.register(r'deudo', DeudoViewSet)
+router.register(r'difunto', DifuntoViewSet, basename='difunto')
+router.register(r'deudo', DeudoViewSet, basename='deudo')
+router.register(r'difuntoread', DifuntoReadViewSet, basename='difuntoread')
+router.register(r'deudoread', DeudoReadViewSet, basename='deudoread')
 
 urlpatterns = router.urls
 

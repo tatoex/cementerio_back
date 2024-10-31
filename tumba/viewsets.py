@@ -7,8 +7,10 @@ from .serializers import TumbaSerializer, LoteSerializer
 from .models import Tumba, Lote
 from .filters import TumbaFilter, LoteFilter
 
-
-
+class PagionacionTumba(PageNumberPagination):
+    page_size = 17
+    page_size_query_param = 'page_size'
+    max_page_size = 105
 
 class TumbaViewSet(viewsets.ModelViewSet):
     #para todos los metodos utilice el serializerclass
@@ -17,14 +19,8 @@ class TumbaViewSet(viewsets.ModelViewSet):
     queryset=Tumba.objects.all()
     filter_backends = [DjangoFilterBackend]
     filterset_class = TumbaFilter
-    # @action(methods=['POST'], detail=True, url_path='check-available')
-    # def check_available(self, request, pk):
-    #     tumba=self.get_object()
-    #     actualizar_estado_disponibilidad(tumba)
-    #     if tumba.available:
-    #         return Response({'status':'La tumba esta disponible'})
-    #     else:
-    #         return Response({'status':'La tumba no esta disponible'})
+    pagination_class = PagionacionTumba
+
     @action(methods=['POST'], detail=True, url_path='set-on-available')
     def set_on_available(self, request, pk):
         tumba = self.get_object()
@@ -46,10 +42,27 @@ class LoteViewSet(viewsets.ModelViewSet):
      # Agregamos el backend de filtros y el filtro correspondiente
     filter_backends = [DjangoFilterBackend]
     filterset_class = LoteFilter
-
-
-class PagionacionGrafica(PageNumberPagination):
-    page_size_query_param = 'page_size'
-    max_page_size = 105
+    pagination_class = PagionacionTumba
 
 # ViewSet de solo lectura para Tumba
+class TumbaReadViewSet(viewsets.ReadOnlyModelViewSet):
+    # Configuramos el serializer para todos los métodos
+    serializer_class = TumbaSerializer
+    # Definimos el queryset para traer todos los elementos
+    queryset = Tumba.objects.all()
+    # Agregamos el backend de filtros y el filtro correspondiente
+    filter_backends = [DjangoFilterBackend]
+    filterset_class = TumbaFilter
+    # Agregamos la configuración de paginación personalizada
+
+# ViewSet de solo lectura para Tumba
+class LoteReadViewSet(viewsets.ReadOnlyModelViewSet):
+    # Configuramos el serializer para todos los métodos
+    serializer_class = TumbaSerializer
+    # Definimos el queryset para traer todos los elementos
+    queryset = Lote.objects.all()
+    # Agregamos el backend de filtros y el filtro correspondiente
+    filter_backends = [DjangoFilterBackend]
+    filterset_class = LoteFilter
+    # Agregamos la configuración de paginación personalizada
+    

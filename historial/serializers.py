@@ -56,7 +56,7 @@ class HistoricalEtapasObituarioSerializer(serializers.ModelSerializer):
     history_user=serializers.StringRelatedField()
     class Meta:
         model=EtapasObituario.history.model
-        fields=['history_id','id','stage_type','place','date','description','history_date','history_type','history_user']
+        fields=['history_id','id','stage_ceremony','place','date','description','history_date','history_type','history_user']
 
 class HistoricalArticuloSerializer(serializers.ModelSerializer):
     history_user=serializers.StringRelatedField()

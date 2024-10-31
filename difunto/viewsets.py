@@ -20,9 +20,6 @@ class DifuntoViewSet(viewsets.ModelViewSet):
     filter_backends = [DjangoFilterBackend]
     filterset_class = DifuntoFilter
     
-
-    
-
 class DeudoViewSet(viewsets.ModelViewSet):
     #para todos los metodos utilice el serializerclass
     serializer_class=DeudoSerializer
@@ -31,3 +28,20 @@ class DeudoViewSet(viewsets.ModelViewSet):
     pagination_class = DifuntoPagination
     filter_backends = [DjangoFilterBackend]
     filterset_class = DeudoFilter
+
+class DifuntoReadViewSet(viewsets.ReadOnlyModelViewSet):
+    #para todos los metodos utilice el serializerclass
+    serializer_class=DifuntoSerializer
+    #definir el queryset para traer los elementos
+    queryset=Difunto.objects.all()
+    filter_backends = [DjangoFilterBackend]
+    filterset_class = DifuntoFilter
+    
+class DeudoReadViewSet(viewsets.ReadOnlyModelViewSet):
+    #para todos los metodos utilice el serializerclass
+    serializer_class=DeudoSerializer
+    #definir el queryset para traer los elementos
+    queryset=Deudo.objects.all()
+    filter_backends = [DjangoFilterBackend]
+    filterset_class = DeudoFilter
+    
