@@ -5,11 +5,11 @@ from .base import BaseModelTumba
 
 # Clase lote
 class Lote (BaseModelTumba):
-    blockName = models.IntegerField(verbose_name='bloque')
-    typeblock=models.CharField(max_length=3, verbose_name='Tipo')
+    blockName = models.IntegerField(verbose_name='Bloque')
+    typeblock=models.CharField(max_length=3, verbose_name='Tipo de Bloque')
     numbersblock=models.IntegerField(null=True,verbose_name='numero de tipo')
-    filas=models.IntegerField(verbose_name='Nuero de filas')
-    columnas=models.IntegerField(verbose_name='Nuero de columnas')
+    filas=models.IntegerField(verbose_name='Numero de filas')
+    columnas=models.IntegerField(verbose_name='Numero de columnas')
     limite=models.IntegerField(verbose_name='Limite de espacio')
     history=HistoricalRecords()
 

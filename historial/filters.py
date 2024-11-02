@@ -20,6 +20,7 @@ class HistoricalFilter(django_filters.FilterSet):
     start_date = django_filters.DateTimeFilter(field_name="history_date", lookup_expr='gte')
     end_date = django_filters.DateTimeFilter(field_name="history_date", lookup_expr='lte')
     entity_id = django_filters.NumberFilter(field_name="id")
+    id = django_filters.NumberFilter(field_name="history_id")
     history_type = django_filters.CharFilter(field_name="history_type")
     user= django_filters.NumberFilter(field_name="history_user")
 
