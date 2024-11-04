@@ -16,7 +16,7 @@ class ArticuloViewSet(viewsets.ModelViewSet):
     #para todos los metodos utilice el serializerclass
     serializer_class=ArticuloSerializer
     #definir el queryset para traer los elementos
-    queryset=Articulo.objects.all()
+    queryset=Articulo.objects.all().order_by('title')
     filter_backends = [DjangoFilterBackend]
     filterset_class = ArticuloFilter
     pagination_class = Pagionacioninfo
@@ -38,7 +38,7 @@ class ArticuloReadViewSet(viewsets.ReadOnlyModelViewSet):
     #para todos los metodos utilice el serializerclass
     serializer_class=ArticuloSerializer
     #definir el queryset para traer los elementos
-    queryset=Articulo.objects.all()
+    queryset=Articulo.objects.all().order_by('title')
     filter_backends = [DjangoFilterBackend]
     filterset_class = ArticuloFilter
         
@@ -46,7 +46,7 @@ class GuiaViewSet(viewsets.ModelViewSet):
     #para todos los metodos utilice el serializerclass
     serializer_class=GuiaSerializer
     #definir el queryset para traer los elementos
-    queryset=Guia.objects.all()
+    queryset=Guia.objects.all().order_by('title')
     filter_backends = [DjangoFilterBackend]
     filterset_class = GuiaFilter
     pagination_class = Pagionacioninfo
@@ -55,7 +55,7 @@ class GuiaReadViewSet(viewsets.ReadOnlyModelViewSet):
     #para todos los metodos utilice el serializerclass
     serializer_class=GuiaSerializer
     #definir el queryset para traer los elementos
-    queryset=Guia.objects.all()
+    queryset=Guia.objects.all().order_by('title')
     filter_backends = [DjangoFilterBackend]
     filterset_class = GuiaFilter
 
@@ -63,7 +63,7 @@ class ServicioInfoViewSet(viewsets.ModelViewSet):
     #para todos los metodos utilice el serializerclass
     serializer_class=ServicioInfoSerializer
     #definir el queryset para traer los elementos
-    queryset=ServicioInfo.objects.all()
+    queryset=ServicioInfo.objects.all().order_by('title')
     filter_backends = [DjangoFilterBackend]
     filterset_class = ServicioInfoFilter
     pagination_class = Pagionacioninfo
@@ -72,7 +72,7 @@ class ServicioInfoReadViewSet(viewsets.ReadOnlyModelViewSet):
     #para todos los metodos utilice el serializerclass
     serializer_class=ServicioInfoSerializer
     #definir el queryset para traer los elementos
-    queryset=ServicioInfo.objects.all()
+    queryset=ServicioInfo.objects.all().order_by('title')
     filter_backends = [DjangoFilterBackend]
     filterset_class = ServicioInfoFilter
 
@@ -80,7 +80,7 @@ class SeccionArticuloViewSet(viewsets.ModelViewSet):
     #para todos los metodos utilice el serializerclass
     serializer_class=SeccionArticuloSerializer
     #definir el queryset para traer los elementos
-    queryset=SeccionArticulo.objects.all()
+    queryset=SeccionArticulo.objects.all().order_by('subtitle')
     filter_backends = [DjangoFilterBackend]
     filterset_class = SeccionArticuloFilter
     pagination_class = Pagionacioninfo
@@ -89,6 +89,6 @@ class SeccionArticuloReadViewSet(viewsets.ReadOnlyModelViewSet):
     #para todos los metodos utilice el serializerclass
     serializer_class=SeccionArticuloSerializer
     #definir el queryset para traer los elementos
-    queryset=SeccionArticulo.objects.all()
+    queryset=SeccionArticulo.objects.all().order_by('subtitle')
     filter_backends = [DjangoFilterBackend]
     filterset_class = SeccionArticuloFilter

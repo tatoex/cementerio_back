@@ -16,7 +16,7 @@ class TumbaViewSet(viewsets.ModelViewSet):
     #para todos los metodos utilice el serializerclass
     serializer_class=TumbaSerializer
     #definir el queryset para traer los elementos
-    queryset=Tumba.objects.all()
+    queryset=Tumba.objects.all().order_by('nameLote')
     filter_backends = [DjangoFilterBackend]
     filterset_class = TumbaFilter
     pagination_class = PagionacionTumba
@@ -38,7 +38,7 @@ class LoteViewSet(viewsets.ModelViewSet):
     #para todos los metodos utilice el serializerclass
     serializer_class=LoteSerializer
     #definir el queryset para traer los elementos
-    queryset=Lote.objects.all()
+    queryset=Lote.objects.all().order_by('blockName')
      # Agregamos el backend de filtros y el filtro correspondiente
     filter_backends = [DjangoFilterBackend]
     filterset_class = LoteFilter
@@ -49,7 +49,7 @@ class TumbaReadViewSet(viewsets.ReadOnlyModelViewSet):
     # Configuramos el serializer para todos los métodos
     serializer_class = TumbaSerializer
     # Definimos el queryset para traer todos los elementos
-    queryset = Tumba.objects.all()
+    queryset = Tumba.objects.all().order_by('nameLote')
     # Agregamos el backend de filtros y el filtro correspondiente
     filter_backends = [DjangoFilterBackend]
     filterset_class = TumbaFilter
@@ -60,7 +60,7 @@ class LoteReadViewSet(viewsets.ReadOnlyModelViewSet):
     # Configuramos el serializer para todos los métodos
     serializer_class = TumbaSerializer
     # Definimos el queryset para traer todos los elementos
-    queryset = Lote.objects.all()
+    queryset = Lote.objects.all().order_by('blockName')
     # Agregamos el backend de filtros y el filtro correspondiente
     filter_backends = [DjangoFilterBackend]
     filterset_class = LoteFilter
