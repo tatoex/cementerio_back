@@ -1,9 +1,10 @@
+from django.db.models import Count, Q
 from rest_framework import viewsets
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework.pagination import PageNumberPagination
 from django_filters.rest_framework import DjangoFilterBackend
-from .serializers import TumbaSerializer, LoteSerializer
+from .serializers import LoteOcupacionSerializer, TumbaSerializer, LoteSerializer
 from .models import Tumba, Lote
 from .filters import TumbaFilter, LoteFilter
 
@@ -65,4 +66,7 @@ class LoteReadViewSet(viewsets.ReadOnlyModelViewSet):
     filter_backends = [DjangoFilterBackend]
     filterset_class = LoteFilter
     # Agregamos la configuración de paginación personalizada
-    
+
+class OcupacionLoteViewSet(viewsets.ReadOnlyModelViewSet):
+    serializer_class = LoteOcupacionSerializer
+    queryset = Lote.objects.all()  # La consulta no necesita agregaciones adicionales

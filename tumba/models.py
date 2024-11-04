@@ -12,6 +12,15 @@ class Lote (BaseModelTumba):
     columnas=models.IntegerField(verbose_name='Numero de columnas')
     limite=models.IntegerField(verbose_name='Limite de espacio')
     history=HistoricalRecords()
+    @property
+    def ocupadas(self):
+        return self.tumbaLote.filter(available=False).count()
+    @property
+    def disponibles(self):
+        return self.tumbaLote.filter(available=True).count()
+    @property
+    def total(self):
+        return self.tumbaLote.count()
 
 
 # Clase tumba
