@@ -70,3 +70,5 @@ class LoteReadViewSet(viewsets.ReadOnlyModelViewSet):
 class OcupacionLoteViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = LoteOcupacionSerializer
     queryset = Lote.objects.all()  # La consulta no necesita agregaciones adicionales
+    filter_backends = [DjangoFilterBackend]
+    filterset_class = LoteFilter

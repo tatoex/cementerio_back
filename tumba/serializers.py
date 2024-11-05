@@ -34,8 +34,7 @@ class TumbaSerializer(serializers.ModelSerializer):
 class LoteOcupacionSerializer(serializers.ModelSerializer):
     ocupadas = serializers.ReadOnlyField()
     disponibles = serializers.ReadOnlyField()
-    total = serializers.ReadOnlyField()
 
     class Meta:
         model = Lote
-        fields = ['blockName', 'typeblock', 'numbersblock', 'ocupadas', 'disponibles', 'total']
+        fields = ['blockName', 'typeblock', 'numbersblock', 'ocupadas', 'disponibles','limite', 'filas', 'columnas']

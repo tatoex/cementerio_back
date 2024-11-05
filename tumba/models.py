@@ -18,10 +18,6 @@ class Lote (BaseModelTumba):
     @property
     def disponibles(self):
         return self.tumbaLote.filter(available=True).count()
-    @property
-    def total(self):
-        return self.tumbaLote.count()
-
 
 # Clase tumba
 class Tumba (BaseModelTumba):
