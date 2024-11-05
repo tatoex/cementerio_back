@@ -1,3 +1,5 @@
+from rest_framework import serializers
+from drf_spectacular.utils import extend_schema_field
 from django.db import models
 from django.contrib.auth.models import User
 from simple_history.models import HistoricalRecords
@@ -12,10 +14,10 @@ class Lote (BaseModelTumba):
     columnas=models.IntegerField(verbose_name='Numero de columnas')
     limite=models.IntegerField(verbose_name='Limite de espacio')
     history=HistoricalRecords()
-    @property
+    @extend_schema_field(serializers.IntegerField)
     def ocupadas(self):
         return self.tumbaLote.filter(available=False).count()
-    @property
+    @extend_schema_field(serializers.IntegerField)
     def disponibles(self):
         return self.tumbaLote.filter(available=True).count()
 

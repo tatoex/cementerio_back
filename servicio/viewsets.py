@@ -5,14 +5,37 @@ from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.pagination import PageNumberPagination
 from rest_framework import viewsets, status
-from .serializers import ServicioSerializer, UserProfileSerializer, GroupSerializer
+from .serializers import ServicioSerializer, UserProfileSerializer, GroupSerializer, TumbaEstadoSerializer
 from .models import Servicio
+from tumba.models import Tumba
 from .filters import ServicioFilter
+from tumba.filters import TumbaFilter
 
 class PagionacionServicio(PageNumberPagination):
     page_size = 17
     page_size_query_param = 'page_size'
     max_page_size = 105
+
+
+class DynamicTumbaPagination(PageNumberPagination):
+    page_size = 17  # Tamaño de página predeterminado si no hay filtro
+    page_size_query_param = 'page_size'
+    max_page_size = 100
+
+    def get_page_size(self, request):
+        # Obtén el parámetro `nameLote` desde el request como ID de Lote
+        name_lote_id = request.query_params.get('nameLote')
+        
+        if name_lote_id:
+            try:
+                # Filtra las tumbas según el ID de `nameLote`
+                total_tumbas = Tumba.objects.filter(nameLote_id=name_lote_id).count()
+                return total_tumbas or self.page_size  # Usa el total de tumbas o el `page_size` predeterminado
+            except ValueError:
+                # Maneja posibles errores en caso de que `nameLote` no sea un entero válido
+                return self.page_size
+
+        return super().get_page_size(request)  # Usa el tamaño de página predeterminado si no hay `nameLote`
 
 class ServicioViewSet(viewsets.ModelViewSet):
     #para todos los metodos utilice el serializerclass
@@ -34,6 +57,13 @@ class ServicioViewSet(viewsets.ModelViewSet):
         servicio.is_paid=False
         servicio.save()
         return Response ({"status":"No esta cancelado"})
+    
+class TumbaEstadoViewSet(viewsets.ReadOnlyModelViewSet):
+    queryset = Tumba.objects.all().order_by('nicheNumber') 
+    serializer_class = TumbaEstadoSerializer
+    filter_backends = [DjangoFilterBackend]
+    filterset_class = TumbaFilter
+    pagination_class = DynamicTumbaPagination
 
 class ServicioReadViewSet(viewsets.ReadOnlyModelViewSet):
     # Configuramos el serializer para todos los métodos

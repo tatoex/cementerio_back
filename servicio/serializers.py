@@ -1,8 +1,10 @@
 from django.contrib.auth.models import User, Group
+from drf_spectacular.utils import extend_schema_field
+from typing import Optional, Dict
 from rest_framework import serializers
 from .models import Servicio
-from tumba.serializers import TumbaSerializer
-from difunto.serializers import DeudoSerializer, DifuntoSerializer
+from tumba.models import Tumba
+from difunto.models import Difunto
 
         
 class ServicioSerializer(serializers.ModelSerializer):
@@ -37,3 +39,29 @@ class GroupSerializer(serializers.ModelSerializer):
         model = Group
         fields = ['id', 'name']  # Campos expuestos
 
+class ServicioEstadoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Servicio
+        fields = [
+            'startDate',     # Campo del servicio
+            'endDate',       # Campo del servicio
+            'ceremony',     # Campo del servicio
+        ]
+
+class DifuntoEstadoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Difunto
+        fields = ['names','last_names',]
+
+class TumbaEstadoSerializer(serializers.ModelSerializer):
+    difunto = serializers.SerializerMethodField()
+    servicio = ServicioEstadoSerializer(source='servicioTumba', many=True, read_only=True)
+
+    class Meta:
+        model = Tumba
+        fields = ['nicheNumber', 'nicheType', 'available', 'difunto', 'servicio']
+    
+    @extend_schema_field(DifuntoEstadoSerializer)
+    def get_difunto(self, obj) -> Optional[Dict]:
+        servicio = obj.servicioTumba.order_by('-startDate').first()
+        return DifuntoEstadoSerializer(servicio.deceased).data if servicio and servicio.deceased else None
