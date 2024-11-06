@@ -237,3 +237,5 @@ cargarJson.py
 *.jpg
 *.png
 # End of https://www.toptal.com/developers/gitignore/api/windows,macos,django
+\cargarCorregirModificar
+\media
