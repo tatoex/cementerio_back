@@ -5,11 +5,15 @@ from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.pagination import PageNumberPagination
 from rest_framework import viewsets, status
+from django.db.models import Count
 from .serializers import ServicioSerializer, UserProfileSerializer, GroupSerializer, TumbaEstadoSerializer
 from .models import Servicio
 from tumba.models import Tumba
 from .filters import ServicioFilter
 from tumba.filters import TumbaFilter
+from django.db.models import Count, Q
+
+from .serializers import ServicioReporteSerializer
 
 class PagionacionServicio(PageNumberPagination):
     page_size = 17
@@ -45,6 +49,17 @@ class ServicioViewSet(viewsets.ModelViewSet):
     filter_backends = [DjangoFilterBackend]
     filterset_class = ServicioFilter
     pagination_class = PagionacionServicio
+    # permission_classes = [IsAuthenticated]
+    @action(detail=False, methods=['get'], url_path='difuntos-por-tipo-servicio')
+    def difuntos_por_tipo_servicio(self, request):
+        # Realiza la agregación para contar difuntos por tipo de servicio
+        data = (
+            self.get_queryset()
+            .values('ceremony')
+            .annotate(difunto_count=Count('deceased'))
+            .order_by('ceremony')
+        )
+        return Response(data)
     @action(methods=['POST'], detail=True, url_path='set-on-paid')
     def set_on_paid(self, request, pk):
         servicio = self.get_object()
@@ -95,3 +110,16 @@ class GroupViewSet(viewsets.ReadOnlyModelViewSet):
             'id': group.id,
             'name': group.name  # Devuelve el nombre del grupo (rol)
         })
+
+    
+
+class ServicioReporteViewSet(viewsets.ViewSet):
+    def list(self, request):
+        # Agrupar los servicios por tipo de ceremonia y estado
+        data = Servicio.objects.values('ceremony').annotate(
+            activos=Count('id', filter=Q(endDate__isnull=True, is_paid=True)),
+            completados=Count('id', filter=Q(endDate__isnull=False, is_paid=True)),
+            pendiente_pago=Count('id', filter=Q(is_paid=False))
+        )
+
+        return Response(data)

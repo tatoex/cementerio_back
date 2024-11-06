@@ -65,3 +65,10 @@ class TumbaEstadoSerializer(serializers.ModelSerializer):
     def get_difunto(self, obj) -> Optional[Dict]:
         servicio = obj.servicioTumba.order_by('-startDate').first()
         return DifuntoEstadoSerializer(servicio.deceased).data if servicio and servicio.deceased else None
+    
+
+class ServicioReporteSerializer(serializers.Serializer):
+    ceremony = serializers.CharField()
+    activos = serializers.IntegerField()
+    completados = serializers.IntegerField()
+    pendiente_pago = serializers.IntegerField()
