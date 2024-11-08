@@ -1,5 +1,6 @@
 from rest_framework import viewsets , mixins
 from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework.pagination import PageNumberPagination
 from difunto.models import Deudo, Difunto
 from tumba.models import Tumba, Lote
 from servicio.models import Servicio
@@ -43,6 +44,10 @@ from .filters import (
     )
 from .models import (HistoricalDifunto,HistoricalDeudo,HistoricalTumba,HistoricalLote,HistoricalServicio,HistoricalObituario,HistoricalMemoria,HistoricalEtapasObituario,HistoricalArticulo,HistoricalGuia,HistoricalServicioInfo,HistoricalSeccionArticulo,HistoricalParroquia,HistoricalIglesia,HistoricalLinkRedSocial)
 
+class HistorialPaginacion(PageNumberPagination):
+    page_size = 17  # Número de registros por página (puedes ajustar este valor)
+    page_size_query_param = 'page_size'
+    max_page_size = 100
 
 class HistoricalDifuntoViewSet(HistoricalActionMixin, viewsets.ReadOnlyModelViewSet):
     """viewset se encarga de manejar el historial del modelo Difunto, combinando funciones y filtros"""
@@ -50,6 +55,7 @@ class HistoricalDifuntoViewSet(HistoricalActionMixin, viewsets.ReadOnlyModelView
     queryset = HistoricalDifunto.objects.all()
     model= Difunto
     model_name:"Difunto"
+    pagination_class = HistorialPaginacion
     filter_backends = [DjangoFilterBackend]
     filterset_class = HistoricalDifuntoFilter
 
@@ -59,6 +65,7 @@ class HistoricalDeudoViewSet(HistoricalActionMixin, viewsets.ReadOnlyModelViewSe
     queryset = HistoricalDeudo.objects.all()
     model= Deudo
     model_name:"Deudo"
+    pagination_class = HistorialPaginacion
     filter_backends = [DjangoFilterBackend]
     filterset_class = HistoricalDeudoFilter
 
@@ -68,6 +75,7 @@ class HistoricalTumbaViewSet(HistoricalActionMixin, viewsets.ReadOnlyModelViewSe
     queryset = HistoricalTumba.objects.all()
     model= Tumba
     model_name:"Tumba"
+    pagination_class = HistorialPaginacion
     filter_backends = [DjangoFilterBackend]
     filterset_class = HistoricalTumbaFilter
 
@@ -77,6 +85,7 @@ class HistoricalLoteViewSet(HistoricalActionMixin, viewsets.ReadOnlyModelViewSet
     queryset = HistoricalLote.objects.all()
     model= Lote
     model_name:"Lote"
+    pagination_class = HistorialPaginacion
     filter_backends = [DjangoFilterBackend]
     filterset_class = HistoricalLoteFilter
 
@@ -86,6 +95,7 @@ class HistoricalServicioViewSet(HistoricalActionMixin, viewsets.ReadOnlyModelVie
     queryset = HistoricalServicio.objects.all()  # Cambia a objects.all() para acceder al historial
     model = Servicio
     model_name = "Servicio"
+    pagination_class = HistorialPaginacion
     filter_backends = [DjangoFilterBackend]
     filterset_class = HistoricalServicioFilter
 
@@ -95,6 +105,7 @@ class HistoricalObituarioViewSet(HistoricalActionMixin, viewsets.ReadOnlyModelVi
     queryset = HistoricalObituario.objects.all()
     model= Obituario
     model_name:"Obituario"
+    pagination_class = HistorialPaginacion
     filter_backends = [DjangoFilterBackend]
     filterset_class = HistoricalObituarioFilter
 
@@ -104,6 +115,7 @@ class HistoricalMemoriaViewSet(HistoricalActionMixin, viewsets.ReadOnlyModelView
     queryset = HistoricalMemoria.objects.all()
     model= Memoria
     model_name:"Memoria"
+    pagination_class = HistorialPaginacion
     filter_backends = [DjangoFilterBackend]
     filterset_class = HistoricalMemoriaFilter
 
@@ -113,6 +125,7 @@ class HistoricalEtapasObituarioViewSet(HistoricalActionMixin, viewsets.ReadOnlyM
     queryset = HistoricalEtapasObituario.objects.all()
     model= EtapasObituario
     model_name:"EtapasObituario"
+    pagination_class = HistorialPaginacion
     filter_backends = [DjangoFilterBackend]
     filterset_class = HistoricalEtapasObituarioFilter
 
@@ -122,6 +135,7 @@ class HistoricalArticuloViewSet(HistoricalActionMixin, viewsets.ReadOnlyModelVie
     queryset = HistoricalArticulo.objects.all()
     model= Articulo
     model_name:"Articulo"
+    pagination_class = HistorialPaginacion
     filter_backends = [DjangoFilterBackend]
     filterset_class = HistoricalArticuloFilter
 
@@ -131,6 +145,7 @@ class HistoricalGuiaViewSet(HistoricalActionMixin, viewsets.ReadOnlyModelViewSet
     queryset = HistoricalGuia.objects.all()
     model= Guia
     model_name:"Guia"
+    pagination_class = HistorialPaginacion
     filter_backends = [DjangoFilterBackend]
     filterset_class = HistoricalGuiaFilter
 
@@ -140,6 +155,7 @@ class HistoricalServicioInfoViewSet(HistoricalActionMixin, viewsets.ReadOnlyMode
     queryset = HistoricalServicioInfo.objects.all()
     model= ServicioInfo
     model_name:"ServicioInfo"
+    pagination_class = HistorialPaginacion
     filter_backends = [DjangoFilterBackend]
     filterset_class = HistoricalServicioInfoFilter
 
@@ -149,6 +165,7 @@ class HistoricalSeccionArticuloViewSet(HistoricalActionMixin, viewsets.ReadOnlyM
     queryset = HistoricalSeccionArticulo.objects.all()
     model= SeccionArticulo
     model_name:"SeccionArticulo"
+    pagination_class = HistorialPaginacion
     filter_backends = [DjangoFilterBackend]
     filterset_class = HistoricalSeccionArticuloFilter
 
@@ -158,6 +175,7 @@ class HistoricalParroquiaViewSet(HistoricalActionMixin, viewsets.ReadOnlyModelVi
     queryset = HistoricalParroquia.objects.all()
     model= Parroquia
     model_name:"Parroquia"
+    pagination_class = HistorialPaginacion
     filter_backends = [DjangoFilterBackend]
     filterset_class = HistoricalParroquiaFilter
 
@@ -167,6 +185,7 @@ class HistoricalIglesiaViewSet(HistoricalActionMixin, viewsets.ReadOnlyModelView
     queryset = HistoricalIglesia.objects.all()
     model= Iglesia
     model_name:"Iglesia"
+    pagination_class = HistorialPaginacion
     filter_backends = [DjangoFilterBackend]
     filterset_class = HistoricalIglesiaFilter
 
@@ -176,5 +195,6 @@ class HistoricalLinkRedSocialViewSet(HistoricalActionMixin, viewsets.ReadOnlyMod
     queryset = HistoricalLinkRedSocial.objects.all()
     model= LinkRedSocial
     model_name:"LinkRedSocial"
+    pagination_class = HistorialPaginacion
     filter_backends = [DjangoFilterBackend]
     filterset_class = HistoricalLinkRedSocialFilter
