@@ -37,4 +37,4 @@ class LoteOcupacionSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Lote
-        fields = ['blockName', 'typeblock', 'numbersblock', 'ocupadas', 'disponibles','limite', 'filas', 'columnas']
+        fields = ['id','blockName', 'typeblock', 'numbersblock', 'ocupadas', 'disponibles','limite', 'filas', 'columnas']
