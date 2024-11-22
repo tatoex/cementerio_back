@@ -59,7 +59,7 @@ class TumbaReadViewSet(viewsets.ReadOnlyModelViewSet):
 # ViewSet de solo lectura para Tumba
 class LoteReadViewSet(viewsets.ReadOnlyModelViewSet):
     # Configuramos el serializer para todos los métodos
-    serializer_class = TumbaSerializer
+    serializer_class = LoteSerializer
     # Definimos el queryset para traer todos los elementos
     queryset = Lote.objects.all().order_by('blockName')
     # Agregamos el backend de filtros y el filtro correspondiente
