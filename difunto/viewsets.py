@@ -15,7 +15,7 @@ class DifuntoViewSet(viewsets.ModelViewSet):
     #para todos los metodos utilice el serializerclass
     serializer_class=DifuntoSerializer
     #definir el queryset para traer los elementos
-    queryset=Difunto.objects.all().order_by('tumba')
+    queryset=Difunto.objects.all().order_by('id')
     pagination_class = DifuntoPagination 
     filter_backends = [DjangoFilterBackend]
     filterset_class = DifuntoFilter
@@ -24,7 +24,7 @@ class DeudoViewSet(viewsets.ModelViewSet):
     #para todos los metodos utilice el serializerclass
     serializer_class=DeudoSerializer
     #definir el queryset para traer los elementos
-    queryset=Deudo.objects.all().order_by('last_names')
+    queryset=Deudo.objects.all().order_by('id')
     pagination_class = DifuntoPagination
     filter_backends = [DjangoFilterBackend]
     filterset_class = DeudoFilter
@@ -33,7 +33,7 @@ class DifuntoReadViewSet(viewsets.ReadOnlyModelViewSet):
     #para todos los metodos utilice el serializerclass
     serializer_class=DifuntoSerializer
     #definir el queryset para traer los elementos
-    queryset=Difunto.objects.all().order_by('tumba')
+    queryset=Difunto.objects.all().order_by('id')
     filter_backends = [DjangoFilterBackend]
     filterset_class = DifuntoFilter
     
@@ -41,7 +41,7 @@ class DeudoReadViewSet(viewsets.ReadOnlyModelViewSet):
     #para todos los metodos utilice el serializerclass
     serializer_class=DeudoSerializer
     #definir el queryset para traer los elementos
-    queryset=Deudo.objects.all().order_by('last_names')
+    queryset=Deudo.objects.all().order_by('id')
     filter_backends = [DjangoFilterBackend]
     filterset_class = DeudoFilter
     
