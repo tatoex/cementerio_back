@@ -33,7 +33,7 @@ class DifuntoSerializer(serializers.ModelSerializer):
             'tumba',       # ID de tumba
             'tumba_ob',    # Objeto tumba completo
             'deudo',       # ID de deudo
-            'deudo_ob'     # Objeto deudo completo
+            'deudo_ob',     # Objeto deudo completo
         ]
         extra_kwargs = {
             'tumba': {'required': False},
