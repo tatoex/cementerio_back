@@ -28,6 +28,7 @@ class ServicioSerializer(serializers.ModelSerializer):
         #     'numberTomb',    # Campo del servicio
         #     'ceremonia',     # Campo del servicio
         # ]
+        
 
 class UserProfileSerializer(serializers.ModelSerializer): # Aquí se debe especificar many=True si es necesario
     class Meta:
