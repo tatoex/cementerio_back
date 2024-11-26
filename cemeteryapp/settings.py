@@ -38,18 +38,14 @@ load_dotenv(dotenv_path)
 SECRET_KEY = os.getenv("DJANGO_SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.getenv('DJANGO_DEBUG', 'False') == 'True'
 CSRF_COOKIE_NAME = "csrftoken"  # Nombre de la cookie CSRF
 CSRF_COOKIE_HTTPONLY = False      # Si es True, la cookie no estará disponible a través de JavaScript
 CSRF_COOKIE_SECURE = True         # Si es True, la cookie solo se enviará a través de HTTPS
 
-ALLOWED_HOSTS = []
-CORS_ALLOWED_ORIGINS = [
-    'http://192.168.100.4',  # IP de tu Mac
-]
-CORS_ORIGIN_WHITELIST = [
-    'http://localhost:4200',  # URL del frontend de Angular
-]
+ALLOWED_HOSTS =  os.getenv('DJANGO_ALLOWED_HOSTS', 'localhost').split(',')
+CORS_ALLOWED_ORIGINS = os.getenv('CORS_ALLOWED_ORIGINS').split(',')
+CORS_ORIGIN_WHITELIST = os.getenv('CORS_ORIGIN_WHITELIST').split(',')
 CORS_ALLOW_METHODS = [
     'GET',
     'POST',
