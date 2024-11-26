@@ -27,9 +27,15 @@ MEDIA_ROOT = BASE_DIR / 'media'
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
+import os
+from dotenv import load_dotenv
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-qda&dno%ojmp6jaa&(-ti3q20d#mqzs&f5bi6_t*c7lhuf5t*s"
+# Cargar el archivo .env
+dotenv_path = os.path.join(BASE_DIR, '.env')  # Ruta absoluta al archivo .env
+load_dotenv(dotenv_path)
+
+# Ahora, las variables están disponibles
+SECRET_KEY = os.getenv("DJANGO_SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -132,11 +138,11 @@ WSGI_APPLICATION = "cemeteryapp.wsgi.application"
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'cementerio_back',
-        'USER': 'rena',
-        'PASSWORD': '2312',
-        'HOST': 'localhost',
-        'PORT': '3306',
+        'NAME': os.getenv("DB_NAME"),
+        'USER': os.getenv("DB_USER"),
+        'PASSWORD': os.getenv("DB_PASSWORD"),
+        'HOST': os.getenv("DB_HOST", "localhost"),
+        'PORT': os.getenv("DB_PORT", "3306"),
     }
 }
 
