@@ -15,10 +15,11 @@ class ArticuloFilter(django_filters.FilterSet):
 class GuiaFilter(django_filters.FilterSet):
     title = django_filters.CharFilter(lookup_expr='icontains')
     category = django_filters.CharFilter(lookup_expr='icontains')
+    
 
     class Meta:
         model = Guia
-        fields = ['title', 'category', 'description_short']
+        fields = ['title', 'category']
 
 class SeccionArticuloFilter(django_filters.FilterSet):
     subtitle = django_filters.CharFilter(lookup_expr='icontains')

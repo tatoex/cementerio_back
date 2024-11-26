@@ -43,25 +43,35 @@ CSRF_COOKIE_NAME = "csrftoken"  # Nombre de la cookie CSRF
 CSRF_COOKIE_HTTPONLY = False      # Si es True, la cookie no estará disponible a través de JavaScript
 CSRF_COOKIE_SECURE = True         # Si es True, la cookie solo se enviará a través de HTTPS
 
-ALLOWED_HOSTS =  os.getenv('DJANGO_ALLOWED_HOSTS', 'localhost').split(',')
-CORS_ALLOWED_ORIGINS = os.getenv('CORS_ALLOWED_ORIGINS').split(',')
-CORS_ORIGIN_WHITELIST = os.getenv('CORS_ORIGIN_WHITELIST').split(',')
+ALLOWED_HOSTS = os.getenv('DJANGO_ALLOWED_HOSTS', 'localhost').split(',')
+
+CORS_ALLOWED_ORIGINS = os.getenv(
+    'CORS_ALLOWED_ORIGINS',
+    'http://localhost,http://127.0.0.1:8000'
+).split(',')
+
 CORS_ALLOW_METHODS = [
     'GET',
     'POST',
     'PUT',
     'PATCH',
     'DELETE',
-    'OPTIONS'
+    'OPTIONS',
 ]
+
+# Opcional, solo si es necesario
+CORS_ORIGIN_WHITELIST = os.getenv(
+    'CORS_ORIGIN_WHITELIST',
+    'http://localhost:4200'
+).split(',')
 CORS_ALLOW_HEADERS = [
     'Authorization',
     'Content-Type',
-    'X-CSRFToken',  # Si estás usando protección CSRF
+    'X-CSRFToken',
     'X-Requested-With',
     'Accept',
 ]
-CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOW_ALL_ORIGINS = False
 CORS_ALLOW_CREDENTIALS = True
 
 # Application definition
@@ -95,6 +105,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    "corsheaders.middleware.CorsMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -103,7 +114,7 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "simple_history.middleware.HistoryRequestMiddleware",
-    "corsheaders.middleware.CorsMiddleware",
+    
 ]
 
 ROOT_URLCONF = "cemeteryapp.urls"
