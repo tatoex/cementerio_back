@@ -20,7 +20,7 @@ class ParroquiaFilter(django_filters.FilterSet):
 
 class LinkRedSocialFilter(django_filters.FilterSet):
     stage_type = django_filters.ChoiceFilter(choices=LinkRedSocial.PLATAFORMAS_CHOICES)
-
+    iglesia = django_filters.ModelChoiceFilter(queryset=Iglesia.objects.all())
     class Meta:
         model = LinkRedSocial
         fields = ['stage_type']
