@@ -12,7 +12,6 @@ from tumba.models import Tumba
 from .filters import ServicioFilter
 from tumba.filters import TumbaFilter
 from django.db.models import Count, Q
-
 from .serializers import ServicioReporteSerializer
 
 class PagionacionServicio(PageNumberPagination):
@@ -49,7 +48,7 @@ class ServicioViewSet(viewsets.ModelViewSet):
     filter_backends = [DjangoFilterBackend]
     filterset_class = ServicioFilter
     pagination_class = PagionacionServicio
-    # permission_classes = [IsAuthenticated]
+
     @action(detail=False, methods=['get'], url_path='difuntos-por-tipo-servicio')
     def difuntos_por_tipo_servicio(self, request):
         # Realiza la agregación para contar difuntos por tipo de servicio

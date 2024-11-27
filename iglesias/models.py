@@ -14,14 +14,14 @@ class Parroquia(BaseIglesia):
 
 class Iglesia(BaseIglesia):
     name=models.CharField(max_length=100, verbose_name='nombre')
-    address = models.CharField(max_length=200, null=True, blank=True, verbose_name='Direccion')
-    latitude = models.DecimalField(max_digits=9, decimal_places=6, null=True, blank=True, verbose_name='latitud')
-    longitude = models.DecimalField(max_digits=9, decimal_places=6, null=True, blank=True, verbose_name='longitud')
-    phone = models.CharField(max_length=15, null=True, blank=True, verbose_name='Telefono')
-    email = models.EmailField(null=True, blank=True, verbose_name='Email')
-    schedule = models.TextField(null=True, blank=True, verbose_name='Horario')
-    priest = models.CharField(max_length=100, null=True, blank=True, verbose_name='Sacerdote')
-    sector = models.TextField(null=True, blank=True, verbose_name='Sector')
+    address = models.CharField(max_length=200,  blank=True, verbose_name='Direccion')
+    latitude = models.DecimalField(max_digits=9, decimal_places=6,  blank=True, verbose_name='latitud')
+    longitude = models.DecimalField(max_digits=9, decimal_places=6,  blank=True, verbose_name='longitud')
+    phone = models.CharField(max_length=15,  blank=True, verbose_name='Telefono')
+    email = models.EmailField( blank=True, verbose_name='Email')
+    schedule = models.TextField( blank=True, verbose_name='Horario')
+    priest = models.CharField(max_length=100,  blank=True, verbose_name='Sacerdote')
+    sector = models.TextField( blank=True, verbose_name='Sector')
     history = HistoricalRecords()
     parish = models.ForeignKey(Parroquia, related_name='iglesias', on_delete=models.CASCADE)
     class Meta:
@@ -45,10 +45,10 @@ class LinkRedSocial(models.Model):
         ('Youtube','Youtube'),
     ]
     stage_type = models.CharField( max_length=50, choices=PLATAFORMAS_CHOICES, verbose_name='Plataforma')
-    url = models.URLField(max_length=255,null=True, blank=True, verbose_name='URL de la red social')
+    url = models.URLField(max_length=255, blank=True, verbose_name='URL de la red social')
     loadDate = models.DateTimeField(auto_now_add=True, verbose_name='Creacion')
     updateDate = models.DateTimeField(auto_now=True, verbose_name='Actualizacion')
-    iglesia = models.ForeignKey(Iglesia, on_delete=models.CASCADE, related_name='redes_sociales', null=True, blank=True)
+    iglesia = models.ForeignKey(Iglesia, on_delete=models.CASCADE, related_name='redes_sociales',  blank=True)
     history = HistoricalRecords()
     class Meta:
         permissions = [

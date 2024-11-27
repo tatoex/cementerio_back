@@ -13,9 +13,9 @@ def validar_tamano_imagen(image):
 # Create your models here.
 class Obituario(BaseObituario):
     obituary_detail = models.TextField(verbose_name='Detalle del obituario')
-    cementery = models.CharField(max_length=200, null=True, blank=True, verbose_name='cemeterio')
-    place = models.CharField(max_length=200, null=True, blank=True, verbose_name='lugar de la ceremonia')
-    name = models.CharField(max_length=200, null=True, blank=True, verbose_name='homenajeado')
+    cementery = models.CharField(max_length=200,  blank=True, verbose_name='cemeterio')
+    place = models.CharField(max_length=200,  blank=True, verbose_name='lugar de la ceremonia')
+    name = models.CharField(max_length=200,  blank=True, verbose_name='homenajeado')
     deceased = models.OneToOneField(Difunto, related_name='obituarioDifunto', on_delete=models.CASCADE)
     history = HistoricalRecords()
     
@@ -29,9 +29,9 @@ class Obituario(BaseObituario):
     
 class Memoria(BaseObituario):
     names = models.CharField(max_length=200, verbose_name='Nombre autor')
-    relationship = models.CharField(max_length=200, null=True, blank=True, verbose_name='Relacion con el difunto')
+    relationship = models.CharField(max_length=200,  blank=True, verbose_name='Relacion con el difunto')
     text = models.TextField(verbose_name='Recuerdo')
-    image = models.ImageField(upload_to='memories/', null=True, blank=True, validators=[validar_tamano_imagen], verbose_name='Imagen opcional')
+    image = models.ImageField(upload_to='memories/',  blank=True, validators=[validar_tamano_imagen], verbose_name='Imagen opcional')
     history = HistoricalRecords()
     obituary = models.ForeignKey(Obituario, related_name='memoriaObituario', on_delete=models.CASCADE)
     class Meta:
@@ -52,7 +52,7 @@ class EtapasObituario(BaseObituario):
         ('Celebracion_vida','Celebración de vida'),
     ]
     stage_ceremony = models.CharField( max_length=100, choices=ETAPAS_OBITUARIO_CHOICES, verbose_name='Etapas de las ceremonias')
-    place = models.CharField(max_length=200, null=True, blank=True, verbose_name='lugar de la ceremonia')
+    place = models.CharField(max_length=200,  blank=True, verbose_name='lugar de la ceremonia')
     history = HistoricalRecords()
     obituary = models.ForeignKey(Obituario, related_name='etapasObituario', on_delete=models.CASCADE)
     ceremony = models.ForeignKey(Servicio, related_name='etapasCeremonia', on_delete=models.CASCADE)

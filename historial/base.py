@@ -4,6 +4,7 @@ from rest_framework.response import Response
 from .utils import obtener_historial_limitado, compara_varias_versiones
 
 class HistoricalActionMixin:
+    id_obtene="Debe proporcionar la ID del objeto"
     """clase para manejar acciones: consultas, comparar y restaurar versiones """
     @action (methods=['GET'], detail=False, url_path='historial' )
     def historical(self, request):
@@ -16,7 +17,7 @@ class HistoricalActionMixin:
         object_id=self.request.query_params.get(f'{self.model._meta.model_name.lower()}_id', None)
         limit=int(self.request.query_params.get('limit', 5))
         if not object_id:
-            return Response({"error":"Debe proporcionar la ID del objeto"}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({"error":"id_obtene"}, status=status.HTTP_400_BAD_REQUEST)
         try:
             historial=obtener_historial_limitado(self.model, object_id, limit)
         except ValueError as e:
@@ -39,7 +40,7 @@ class HistoricalActionMixin:
         limit = int(self.request.query_params.get('limit', 5))
 
         if not object_id:
-            return Response({"error":"Debe proporcionar la ID del objeto"}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({"error":"id_obtene"}, status=status.HTTP_400_BAD_REQUEST)
         try:
             # llama a la funcion para comparar varias versiones
             cambios=compara_varias_versiones(self.model, object_id, attribute, limit)
@@ -57,7 +58,7 @@ class HistoricalActionMixin:
         """
         version_id=request.data.get('version_id',None)
         if not version_id:
-            return Response({"error":"Debe proporcionar la ID del objeto"}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({"error":"id_obtene"}, status=status.HTTP_400_BAD_REQUEST)
         try:
             # obtener la version historica
             version = self.model.history.get(history_id=version_id)
