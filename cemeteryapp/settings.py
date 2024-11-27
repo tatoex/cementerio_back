@@ -47,7 +47,7 @@ ALLOWED_HOSTS = os.getenv('DJANGO_ALLOWED_HOSTS', 'localhost').split(',')
 
 CORS_ALLOWED_ORIGINS = os.getenv(
     'CORS_ALLOWED_ORIGINS',
-    'http://localhost,http://127.0.0.1:8000'
+    ''
 ).split(',')
 
 CORS_ALLOW_METHODS = [
