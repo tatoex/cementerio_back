@@ -1,10 +1,5 @@
 import django_filters
 from difunto.models import Difunto, Deudo
-# from tumba.models import Tumba, Lote
-# from servicio.models import Servicio
-# from obituarios.models import Obituario, Memoria, EtapasObituario
-# from iglesias.models import Parroquia, Iglesia, LinkRedSocial
-# from informativos.models import Articulo, Guia, ServicioInfo, SeccionArticulo
 from difunto.filters import DifuntoFilter, DeudoFilter
 from tumba.filters import TumbaFilter, LoteFilter
 from servicio.filters import ServicioFilter

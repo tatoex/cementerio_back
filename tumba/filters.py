@@ -6,9 +6,7 @@ class TumbaFilter(django_filters.FilterSet):
     nicheType = django_filters.ChoiceFilter(choices=Tumba.TIPO_NICHO_CHOICES)
     available = django_filters.BooleanFilter()
     nameLote = django_filters.ModelChoiceFilter(queryset=Lote.objects.all())
-    # nicheNumber_gt = django_filters.NumberFilter(field_name='nicheNumber', lookup_expr='gt')
-    # nicheNumber_lt = django_filters.NumberFilter(field_name='nicheNumber', lookup_expr='lt')
-
+    
     class Meta:
         model = Tumba
         fields = ['nicheNumber', 'nicheType', 'available', 'nameLote']

@@ -13,22 +13,6 @@ class ServicioSerializer(serializers.ModelSerializer):
     class Meta:
         model = Servicio
         fields = '__all__'
-        # [
-        #     'id',
-        #     'startDate',     # Campo del servicio
-        #     'endDate',       # Campo del servicio
-        #     'names',         # Campo del servicio
-        #     'date',          # Campo del servicio
-        #     'description',   # Campo del servicio
-        #     'is_paid',       # Campo del servicio
-        #     'amount_paid',   # Campo del servicio
-        #     'payment_date',  # Campo del servicio
-        #     'description',   # Campo del servicio
-        #     'deceased',      # Campo del servicio
-        #     'numberTomb',    # Campo del servicio
-        #     'ceremonia',     # Campo del servicio
-        # ]
-        
 
 class UserProfileSerializer(serializers.ModelSerializer): # Aquí se debe especificar many=True si es necesario
     class Meta:
