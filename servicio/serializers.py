@@ -8,8 +8,6 @@ from difunto.models import Difunto
 
         
 class ServicioSerializer(serializers.ModelSerializer):
-    # deceased = DifuntoSerializer(read_only=True)
-    # ceremonia = CeremoniaSerializer(many=True,read_only=True)
     class Meta:
         model = Servicio
         fields = '__all__'

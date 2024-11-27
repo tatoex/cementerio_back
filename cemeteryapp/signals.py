@@ -5,9 +5,8 @@ from django.dispatch import receiver
 @receiver(post_migrate)
 def create_user_groups(sender, **kwargs):
     # crear grupos
-    deudo_group,create = Group.objects.get_or_create(name='Deudo')
-    secretaria_group, create = Group.objects.get_or_create(name='Secretaria')
-    admin_group, create = Group.objects.get_or_create(name='Administrador')
+    secretaria_group, _ = Group.objects.get_or_create(name='Secretaria')
+    admin_group, _ = Group.objects.get_or_create(name='Administrador')
 
     # asignar permisos
         # difunto
