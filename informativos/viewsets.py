@@ -63,7 +63,7 @@ class ServicioInfoViewSet(viewsets.ModelViewSet):
     #para todos los metodos utilice el serializerclass
     serializer_class=ServicioInfoSerializer
     #definir el queryset para traer los elementos
-    queryset=ServicioInfo.objects.all().order_by('title')
+    queryset=ServicioInfo.objects.all().order_by('updateDate')
     filter_backends = [DjangoFilterBackend]
     filterset_class = ServicioInfoFilter
     pagination_class = Pagionacioninfo
@@ -72,7 +72,7 @@ class ServicioInfoReadViewSet(viewsets.ReadOnlyModelViewSet):
     #para todos los metodos utilice el serializerclass
     serializer_class=ServicioInfoSerializer
     #definir el queryset para traer los elementos
-    queryset=ServicioInfo.objects.all().order_by('title')
+    queryset=ServicioInfo.objects.all().order_by('updateDate')
     filter_backends = [DjangoFilterBackend]
     filterset_class = ServicioInfoFilter
 
