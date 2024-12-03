@@ -12,8 +12,8 @@ class Deudo(BaseModelDifunto):
     ]
     phoneNumber = models.CharField(max_length=15, verbose_name='telefono')
     email = models.EmailField(verbose_name='email')
-    address = models.CharField(max_length=100, blank=True, verbose_name='direccion')
-    tipo = models.CharField(max_length=50, verbose_name='tipo relacion', choices=TIPO_DEUDO_CHOICES)
+    address = models.CharField(default="Quito",max_length=100, blank=True, verbose_name='direccion')
+    tipo = models.CharField(default="Conocido",max_length=50, verbose_name='tipo relacion', choices=TIPO_DEUDO_CHOICES)
     history=HistoricalRecords()
     class Meta:
         permissions = [
@@ -25,7 +25,7 @@ class Deudo(BaseModelDifunto):
 class Difunto(BaseModelDifunto):
     requestNumber = models.CharField(max_length=20, unique=True, verbose_name='solicitud')
     history = HistoricalRecords()
-    tumba = models.ForeignKey(Tumba, related_name='difuntoTumba', on_delete=models.DO_NOTHING, blank=True) 
+    tumba = models.ForeignKey( Tumba, related_name='difuntoTumba', on_delete=models.DO_NOTHING, default=6000,blank=True) 
     deudo = models.ForeignKey(Deudo, related_name='difuntoDeudo', on_delete=models.DO_NOTHING) 
     class Meta:
         permissions = [
