@@ -13,6 +13,14 @@ class LoteSerializer(serializers.ModelSerializer):
             'columnas',         # Campo del Lote
             'limite',           # Campo del Lote
             'description',      # Campo del Lote
+            'x',
+            'y',
+            'rotation','text_x',
+            'text_y',
+            'trans_r_x',
+            'trans_r_y',
+            'trans_t_x',
+            'trans_t_y',
         ]
         read_only_fields = ('modified_by',)
 
@@ -37,4 +45,22 @@ class LoteOcupacionSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Lote
-        fields = ['id','blockName', 'typeblock', 'numbersblock', 'ocupadas', 'disponibles','limite', 'filas', 'columnas','x','y','width','height','rotation','text_x','text_y','trans_x','trans_y']
+        fields = [
+            'id',
+            'blockName',
+            'typeblock', 
+            'numbersblock', 
+            'ocupadas', 
+            'disponibles',
+            'limite', 
+            'filas', 
+            'columnas',
+            'x',
+            'y',
+            'rotation','text_x',
+            'text_y',
+            'trans_r_x',
+            'trans_r_y',
+            'trans_t_x',
+            'trans_t_y',
+        ]

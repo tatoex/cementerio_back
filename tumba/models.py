@@ -15,13 +15,13 @@ class Lote (BaseModelTumba):
     limite=models.IntegerField(verbose_name='Limite de espacio')# Coordenada X
     x = models.FloatField(default=0.1,verbose_name='x', blank="true")  # Coordenada X
     y = models.FloatField(default=0.1,verbose_name='y', blank="true")  # Coordenada Y
-    rotation = models.FloatField(default=0.1, verbose_name='rotacion', blank="true")  # Rotación opcional
+    rotation = models.IntegerField(default=0, verbose_name='rotacion', blank="true")  # Rotación opcional
     text_x = models.IntegerField(default=0,verbose_name='text x', blank="true")  # Posición X del texto
     text_y = models.IntegerField(default=0,verbose_name='text y', blank="true")  # Posición Y del texto
-    trans_r_x = models.FloatField(default=0.1, verbose_name='Translate X', blank=True)  # Coordenada X del translate rectangulo
-    trans_r_y = models.FloatField(default=0.1, verbose_name='Translate Y', blank=True)  # Coordenada Y del translate rectangulo
-    trans_t_x = models.FloatField(default=0.1, verbose_name='Translate X', blank=True)  # Coordenada X del translate texto
-    trans_t_y = models.FloatField(default=0.1, verbose_name='Translate Y', blank=True)  # Coordenada Y del translate texto
+    trans_r_x = models.FloatField(default=0.0, verbose_name='Translate X', blank=True)  # Coordenada X del translate rectangulo
+    trans_r_y = models.FloatField(default=0.0, verbose_name='Translate Y', blank=True)  # Coordenada Y del translate rectangulo
+    trans_t_x = models.FloatField(default=0.0, verbose_name='Translate X', blank=True)  # Coordenada X del translate texto
+    trans_t_y = models.FloatField(default=0.0, verbose_name='Translate Y', blank=True)  # Coordenada Y del translate texto
     history=HistoricalRecords()
     @extend_schema_field(serializers.IntegerField)
     def ocupadas(self):
