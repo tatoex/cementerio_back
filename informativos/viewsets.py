@@ -8,7 +8,7 @@ from .models import Articulo, Guia, ServicioInfo, SeccionArticulo
 from .filters import ArticuloFilter, GuiaFilter, ServicioInfoFilter, SeccionArticuloFilter
 
 class Pagionacioninfo(PageNumberPagination):
-    page_size = 17
+    page_size = 10
     page_size_query_param = 'page_size'
     max_page_size = 105
 
@@ -41,6 +41,7 @@ class ArticuloReadViewSet(viewsets.ReadOnlyModelViewSet):
     queryset=Articulo.objects.all().order_by('title')
     filter_backends = [DjangoFilterBackend]
     filterset_class = ArticuloFilter
+
         
 class GuiaViewSet(viewsets.ModelViewSet):
     #para todos los metodos utilice el serializerclass
@@ -80,7 +81,7 @@ class SeccionArticuloViewSet(viewsets.ModelViewSet):
     #para todos los metodos utilice el serializerclass
     serializer_class=SeccionArticuloSerializer
     #definir el queryset para traer los elementos
-    queryset=SeccionArticulo.objects.all().order_by('subtitle')
+    queryset=SeccionArticulo.objects.all().order_by('id')
     filter_backends = [DjangoFilterBackend]
     filterset_class = SeccionArticuloFilter
     pagination_class = Pagionacioninfo
@@ -89,6 +90,6 @@ class SeccionArticuloReadViewSet(viewsets.ReadOnlyModelViewSet):
     #para todos los metodos utilice el serializerclass
     serializer_class=SeccionArticuloSerializer
     #definir el queryset para traer los elementos
-    queryset=SeccionArticulo.objects.all().order_by('subtitle')
+    queryset=SeccionArticulo.objects.all().order_by('id')
     filter_backends = [DjangoFilterBackend]
     filterset_class = SeccionArticuloFilter
