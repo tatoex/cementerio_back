@@ -9,8 +9,7 @@ from django.db.models import Count
 from .serializers import ServicioSerializer, UserProfileSerializer, GroupSerializer, TumbaEstadoSerializer
 from .models import Servicio
 from tumba.models import Tumba
-from .filters import ServicioFilter
-from tumba.filters import TumbaFilter
+from .filters import  ServicioFilter, TumbaEstadoFilter
 from django.db.models import Count, Q
 from .serializers import ServicioReporteSerializer
 
@@ -76,7 +75,7 @@ class TumbaEstadoViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Tumba.objects.all().order_by('nicheNumber') 
     serializer_class = TumbaEstadoSerializer
     filter_backends = [DjangoFilterBackend]
-    filterset_class = TumbaFilter
+    filterset_class = TumbaEstadoFilter
     pagination_class = DynamicTumbaPagination
 
 class ServicioReadViewSet(viewsets.ReadOnlyModelViewSet):
