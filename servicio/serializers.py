@@ -42,7 +42,7 @@ class TumbaEstadoSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Tumba
-        fields = ['nicheNumber', 'nicheType', 'available', 'difunto', 'servicio']
+        fields = ['nicheNumber', 'nicheType', 'available','nameLote', 'difunto', 'servicio']
     
     @extend_schema_field(DifuntoEstadoSerializer)
     def get_difunto(self, obj) -> Optional[Dict]:

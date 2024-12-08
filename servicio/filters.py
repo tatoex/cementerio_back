@@ -36,7 +36,7 @@ class TumbaEstadoFilter(django_filters.FilterSet):
 
     def filter_nombre_difunto(self, queryset, name, value):
         # Filtrar por coincidencia exacta del nombre del difunto
-        return queryset.filter(servicioTumba__deceased__names__iexact=value).distinct()
+        return queryset.filter(servicioTumba__deceased__names__icontains=value).distinct()
 
     def filter_apellido_difunto(self, queryset, name, value):
         # Filtrar por coincidencia exacta del apellido del difunto
