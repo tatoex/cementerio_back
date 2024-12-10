@@ -4,6 +4,7 @@ from .base import BaseObituario
 from difunto.models import Difunto
 from servicio.models import Servicio
 from django.core.exceptions import ValidationError
+from django.utils.timezone import now
 
 nadaa="N/A"
 def validar_tamano_imagen(image):
@@ -18,6 +19,9 @@ class Obituario(BaseObituario):
     place = models.CharField(max_length=200, default=nadaa, blank=True, verbose_name='lugar de la ceremonia')
     name = models.CharField(max_length=200, default=nadaa, blank=True, verbose_name='homenajeado')
     deceased = models.OneToOneField(Difunto, related_name='obituarioDifunto', on_delete=models.CASCADE)
+    image_dif = models.ImageField(upload_to='obituario/', default=nadaa,  blank=True, validators=[validar_tamano_imagen], verbose_name='Imagen opcional')
+    date_dead=models.DateTimeField(blank=True, default=now, verbose_name='fecha de fallecimiento')
+    date_born=models.DateTimeField(blank=True, default=now, verbose_name='fecha de nacimiento')
     history = HistoricalRecords()
     
     class Meta:

@@ -14,7 +14,7 @@ class ObituarioViewSet(viewsets.ModelViewSet):
     #para todos los metodos utilice el serializerclass
     serializer_class=ObituarioSerializer
     #definir el queryset para traer los elementos
-    queryset=Obituario.objects.all().order_by('date')
+    queryset=Obituario.objects.all().order_by('id')
     filter_backends = [DjangoFilterBackend]
     filterset_class = ObituarioFilter
     pagination_class = PagionacionObituario

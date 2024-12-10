@@ -114,7 +114,7 @@ class Migration(migrations.Migration):
                 ('loadDate', models.DateTimeField(blank=True, editable=False, verbose_name='creacion')),
                 ('updateDate', models.DateTimeField(blank=True, editable=False, verbose_name='actualizacion')),
                 ('description', models.TextField(blank=True, max_length=300, null=True, verbose_name='observaciones')),
-                ('stage_type', models.CharField(choices=[('Velacion', 'Velación'), ('Misa', 'Misa'), ('Recepcion', 'Recepción'), ('Entrega_cenizas', 'Entrega de las cenizas'), ('Lectura_recuerdos', 'Lectura de recuerdos'), ('Celebracion_vida', 'Celebración de vida')], max_length=100, verbose_name='Etapas de las ceremonias')),
+                ('stage_ceremony', models.CharField(choices=[('Velacion', 'Velación'), ('Misa', 'Misa'), ('Recepcion', 'Recepción'), ('Entrega_cenizas', 'Entrega de las cenizas'), ('Lectura_recuerdos', 'Lectura de recuerdos'), ('Celebracion_vida', 'Celebración de vida')], max_length=100, verbose_name='Etapas de las ceremonias')),
                 ('place', models.CharField(blank=True, max_length=200, null=True, verbose_name='lugar de la ceremonia')),
                 ('history_id', models.AutoField(primary_key=True, serialize=False)),
                 ('history_date', models.DateTimeField(db_index=True)),
@@ -136,7 +136,7 @@ class Migration(migrations.Migration):
             name='EtapasObituario',
             fields=[
                 ('baseobituario_ptr', models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE, parent_link=True, primary_key=True, serialize=False, to='obituarios.baseobituario')),
-                ('stage_type', models.CharField(choices=[('Velacion', 'Velación'), ('Misa', 'Misa'), ('Recepcion', 'Recepción'), ('Entrega_cenizas', 'Entrega de las cenizas'), ('Lectura_recuerdos', 'Lectura de recuerdos'), ('Celebracion_vida', 'Celebración de vida')], max_length=100, verbose_name='Etapas de las ceremonias')),
+                ('stage_ceremony', models.CharField(choices=[('Velacion', 'Velación'), ('Misa', 'Misa'), ('Recepcion', 'Recepción'), ('Entrega_cenizas', 'Entrega de las cenizas'), ('Lectura_recuerdos', 'Lectura de recuerdos'), ('Celebracion_vida', 'Celebración de vida')], max_length=100, verbose_name='Etapas de las ceremonias')),
                 ('place', models.CharField(blank=True, max_length=200, null=True, verbose_name='lugar de la ceremonia')),
                 ('ceremony', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='etapasCeremonia', to='servicio.ceremonia')),
                 ('obituary', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='etapasObituario', to='obituarios.obituario')),

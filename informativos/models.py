@@ -41,8 +41,8 @@ class ServicioInfo(BaseInformativo):
 class SeccionArticulo(models.Model):
     subtitle = models.CharField(max_length=200, verbose_name='Subtitulo', blank=True,)
     content = models.TextField( verbose_name='contenido',  blank=True,)
-    loadDate = models.DateTimeField(auto_now_add=True, blank=True, null=True,verbose_name='Creacion')
-    updateDate = models.DateTimeField(auto_now=True, blank=True,null=True, verbose_name='Actualizacion')
+    loadDate = models.DateTimeField(auto_now_add=True,  verbose_name='Creacion')
+    updateDate = models.DateTimeField(auto_now=True, verbose_name='Actualizacion')
     description = models.TextField(max_length=300, blank=True, default=nada, verbose_name='observaciones')
     article = models.ForeignKey(Articulo, related_name='seccionArticulo', on_delete=models.CASCADE)
     history = HistoricalRecords()
