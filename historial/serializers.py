@@ -1,6 +1,19 @@
 from rest_framework import serializers
-from .models import (HistoricalDifunto,HistoricalDeudo,HistoricalTumba,HistoricalLote,HistoricalServicio,HistoricalObituario,HistoricalMemoria,HistoricalEtapasObituario,HistoricalArticulo,HistoricalGuia,HistoricalServicioInfo,HistoricalSeccionArticulo,HistoricalParroquia,HistoricalIglesia,HistoricalLinkRedSocial)
-
+from .models import (HistoricalDifunto,
+                     HistoricalDeudo,
+                     HistoricalTumba,
+                     HistoricalLote,
+                     HistoricalServicio,
+                     HistoricalObituario,
+                     HistoricalMemoria,
+                     HistoricalEtapasObituario,
+                     HistoricalArticulo,
+                     HistoricalGuia,
+                     HistoricalServicioInfo,
+                     HistoricalSeccionArticulo,
+                     HistoricalParroquia,
+                     HistoricalIglesia,
+                     HistoricalLinkRedSocial)
 
 class HistoricalDifuntoSerializer(serializers.ModelSerializer):
     history_user=serializers.StringRelatedField()

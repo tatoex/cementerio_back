@@ -39,6 +39,9 @@ class Memoria(BaseObituario):
     image = models.ImageField(upload_to='memories/', default=nadaa,  blank=True, validators=[validar_tamano_imagen], verbose_name='Imagen opcional')
     history = HistoricalRecords()
     obituary = models.ForeignKey(Obituario, related_name='memoriaObituario', on_delete=models.CASCADE)
+    @property
+    def obituarioDetails(self):
+        return f"{self.obituary.deceased.names} {self.obituary.deceased.last_names}"
     class Meta:
         permissions = [
                 ("can_view_memoria", "Can view memoria"),

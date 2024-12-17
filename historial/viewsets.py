@@ -42,7 +42,23 @@ from .filters import (
     HistoricalIglesiaFilter,
     HistoricalLinkRedSocialFilter,
     )
-from .models import (HistoricalDifunto,HistoricalDeudo,HistoricalTumba,HistoricalLote,HistoricalServicio,HistoricalObituario,HistoricalMemoria,HistoricalEtapasObituario,HistoricalArticulo,HistoricalGuia,HistoricalServicioInfo,HistoricalSeccionArticulo,HistoricalParroquia,HistoricalIglesia,HistoricalLinkRedSocial)
+from .models import (
+    HistoricalDifunto,
+    HistoricalDeudo,
+    HistoricalTumba,
+    HistoricalLote,
+    HistoricalServicio,
+    HistoricalObituario,
+    HistoricalMemoria,
+    HistoricalEtapasObituario,
+    HistoricalArticulo,
+    HistoricalGuia,
+    HistoricalServicioInfo,
+    HistoricalSeccionArticulo,
+    HistoricalParroquia,
+    HistoricalIglesia,
+    HistoricalLinkRedSocial,
+    )
 
 class HistorialPaginacion(PageNumberPagination):
     page_size = 17  # Número de registros por página (puedes ajustar este valor)
