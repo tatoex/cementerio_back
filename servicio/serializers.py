@@ -12,15 +12,7 @@ class ServicioSerializer(serializers.ModelSerializer):
         model = Servicio
         fields = '__all__'
 
-class UserProfileSerializer(serializers.ModelSerializer): # Aquí se debe especificar many=True si es necesario
-    class Meta:
-        model = User
-        fields = '__all__'  # O especifica los campos que necesites
 
-class GroupSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Group
-        fields = ['id', 'name']  # Campos expuestos
 
 class ServicioEstadoSerializer(serializers.ModelSerializer):
     class Meta:

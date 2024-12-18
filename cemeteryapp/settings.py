@@ -102,6 +102,9 @@ INSTALLED_APPS = [
     #Auditoria
     'simple_history',
     'historial',
+    # notificacion
+    'notifications',
+    
 ]
 
 MIDDLEWARE = [

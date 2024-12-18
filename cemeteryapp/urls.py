@@ -27,8 +27,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('docs.urls')),
     path('api-auth/', include('rest_framework.urls')),
-    path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),  # Para obtener el token
-    path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'), 
+    path('api/auth/', include('auth.urls')),
     path('api/', include('tumba.urls')),
     path('api/', include('servicio.urls')),
     path('api/', include('difunto.urls')),
@@ -36,6 +35,7 @@ urlpatterns = [
     path('api/', include('obituarios.urls')),
     path('api/', include('informativos.urls')),
     path('api/', include('historial.urls')),
+    path('api/', include('notifications.urls')),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

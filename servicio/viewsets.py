@@ -2,11 +2,10 @@ from django_filters.rest_framework import DjangoFilterBackend
 from django.contrib.auth.models import User, Group
 from rest_framework.decorators import action
 from rest_framework.response import Response
-from rest_framework.permissions import IsAuthenticated
 from rest_framework.pagination import PageNumberPagination
-from rest_framework import viewsets, status
+from rest_framework import viewsets
 from django.db.models import Count
-from .serializers import ServicioSerializer, UserProfileSerializer, GroupSerializer, TumbaEstadoSerializer
+from .serializers import ServicioSerializer, TumbaEstadoSerializer
 from .models import Servicio
 from tumba.models import Tumba
 from .filters import  ServicioFilter, TumbaEstadoFilter
@@ -87,30 +86,7 @@ class ServicioReadViewSet(viewsets.ReadOnlyModelViewSet):
     filter_backends = [DjangoFilterBackend]
     filterset_class = ServicioFilter
     # Agregamos la configuración de paginación personalizada
-
-class UserProfileViewSet(viewsets.ModelViewSet):
-    queryset = User.objects.all()  # Queryset de todos los usuarios
-    serializer_class = UserProfileSerializer
-    permission_classes = [IsAuthenticated]
-
-    def retrieve(self, request, *args, **kwargs):
-        user = request.user  # Obtiene el usuario autenticado
-        serializer = self.get_serializer(user)  # Serializa el usuario
-        return Response(serializer.data)  # Devuelve los datos serializados
-
-class GroupViewSet(viewsets.ReadOnlyModelViewSet):
-    queryset = Group.objects.all()
-    serializer_class = GroupSerializer  # Asegúrate de definir el serializer
-
-    def retrieve(self, request, *args, **kwargs):
-        group = self.get_object()  # Obtiene el grupo por ID
-        return Response({
-            'id': group.id,
-            'name': group.name  # Devuelve el nombre del grupo (rol)
-        })
-
     
-
 class ServicioReporteViewSet(viewsets.ViewSet):
     def list(self, request):
         # Agrupar los servicios por tipo de ceremonia y estado
@@ -121,3 +97,4 @@ class ServicioReporteViewSet(viewsets.ViewSet):
         )
 
         return Response(data)
+    
