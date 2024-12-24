@@ -42,7 +42,7 @@ def test_invalid_tumba_serializer():
     assert 'nameLote' in serializer.errors
 
 @pytest.mark.django_db
-def test_invalid_tumba_nicheNumber(lote):
+def test_invalid_tumba_niche_number(lote):
     data = {
         'nicheNumber': 0,  # Inválido
         'nicheType': 'T',
