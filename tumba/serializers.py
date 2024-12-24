@@ -26,7 +26,7 @@ class LoteSerializer(serializers.ModelSerializer):
 
 
 class TumbaSerializer(serializers.ModelSerializer):
-    nameLote = LoteSerializer(read_only=True)
+    lote = LoteSerializer(source='nameLote', read_only=True)
     class Meta:
         model = Tumba
         fields = [
@@ -36,7 +36,26 @@ class TumbaSerializer(serializers.ModelSerializer):
             'available',     # Campo del Tumba
             'description',   # Campo del Tumba
             'nameLote',      # Objeto relacionado lote
+            'lote',   
         ]
+        extra_kwargs = {
+            'nameLote': {'required': True},
+        }
+    def validate_nicheNumber(self, value):
+        if value <= 0:
+            raise serializers.ValidationError("El número de tumba debe ser mayor a 0.")
+        return value
+    def validate(self, data):
+        lote = data.get('nameLote')
+        if lote and lote.tumbaLote.count() >= lote.limite:
+            raise serializers.ValidationError("No se pueden agregar más tumbas, se ha alcanzado el límite del lote.")
+        return data
+    def to_representation(self, instance):
+        representation = super().to_representation(instance)
+        request = self.context.get('request')
+        if request and request.method != 'GET':
+            representation.pop('lote', None)
+        return representation
     
 
 class LoteOcupacionSerializer(serializers.ModelSerializer):

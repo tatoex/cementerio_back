@@ -1,5 +1,6 @@
 from django.db.models import Count, Q
 from rest_framework import viewsets
+from rest_framework import status
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework.pagination import PageNumberPagination
@@ -21,7 +22,23 @@ class TumbaViewSet(viewsets.ModelViewSet):
     filter_backends = [DjangoFilterBackend]
     filterset_class = TumbaFilter
     pagination_class = PagionacionTumba
+    def create(self, request, *args, **kwargs):
+        data = request.data
+        lote_id = data.get('nameLote')
+        if not lote_id:
+            return Response({'error': 'Lote es requerido.'}, status=status.HTTP_400_BAD_REQUEST)
 
+        try:
+            lote = Lote.objects.get(id=lote_id)
+        except Lote.DoesNotExist:
+            return Response({'error': 'El lote especificado no existe.'}, status=status.HTTP_400_BAD_REQUEST)
+
+        # Validar si se excede el límite
+        if lote.tumbaLote.count() >= lote.limite:
+            return Response({'error': 'No se pueden agregar más tumbas, se ha alcanzado el límite del lote.'}, status=status.HTTP_400_BAD_REQUEST)
+
+        return super().create(request, *args, **kwargs)
+    
     @action(methods=['POST'], detail=True, url_path='set-on-available')
     def set_on_available(self, request, pk):
         tumba = self.get_object()
