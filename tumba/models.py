@@ -3,13 +3,16 @@ from drf_spectacular.utils import extend_schema_field
 from django.db import models
 from django.contrib.auth.models import User
 from simple_history.models import HistoricalRecords
-from django.core.validators import MaxValueValidator
+from django.core.validators import MaxValueValidator, MinValueValidator
 from django.core.exceptions import ValidationError
 from .base import BaseModelTumba
 
 # Clase lote
 class Lote (BaseModelTumba):
-    blockName = models.PositiveIntegerField(verbose_name='Lote')# Numero de lote
+    blockName = models.PositiveIntegerField(verbose_name='Lote',validators=[
+            MinValueValidator(1),
+            MaxValueValidator(12)
+        ],)# Numero de lote
     typeblock=models.CharField(max_length=3, verbose_name='Tipo de Bloque')# Tipo de bloque
     numbersblock=models.PositiveIntegerField(blank=True, default=0,verbose_name='numero de tipo')# numero de bloque
     filas=models.PositiveIntegerField(verbose_name='Numero de filas')# Coordenada X

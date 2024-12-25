@@ -1,6 +1,7 @@
 from django.db import models
 from .base import BaseModelDifunto
 from simple_history.models import HistoricalRecords
+from django.core.exceptions import ValidationError
 from tumba.models import Tumba
 
 # Clase deudo
@@ -25,8 +26,11 @@ class Deudo(BaseModelDifunto):
 class Difunto(BaseModelDifunto):
     requestNumber = models.CharField(max_length=20, unique=True, verbose_name='solicitud')
     history = HistoricalRecords()
-    tumba = models.ForeignKey( Tumba, related_name='difuntoTumba', on_delete=models.DO_NOTHING, default=6000,blank=True) 
+    tumba = models.ForeignKey( Tumba, related_name='difuntoTumba', on_delete=models.DO_NOTHING, default=6000) 
     deudo = models.ForeignKey(Deudo, related_name='difuntoDeudo', on_delete=models.DO_NOTHING) 
+    def clean(self):
+        if not self.tumba:
+            raise ValidationError("Una tumba válida debe estar asociada al difunto.")
     class Meta:
         permissions = [
             ("can_view_difunto", "Can view difunto"),
