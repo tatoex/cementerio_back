@@ -10,55 +10,6 @@ from difunto.models import Difunto, Deudo
 from datetime import datetime
 from decimal import Decimal
 
-@pytest.fixture
-def api_client():
-    return APIClient()
-
-@pytest.fixture
-def lote():
-    # Crea un lote válido
-    return Lote.objects.create(blockName=1, typeblock="A", numbersblock=10, filas=5, columnas=4, limite=20)
-
-@pytest.fixture
-def tumba(lote):
-    # Crea una tumba asociada al lote
-    return Tumba.objects.create(nicheNumber=1, nicheType="E", available=True, nameLote=lote)
-
-@pytest.fixture
-def deudo():
-    # Crea un deudo con información básica
-    return Deudo.objects.create(
-        names="John",
-        last_names="Doe",
-        idNumber="1234567890",
-        phoneNumber="0987654321",
-        email="john.doe@example.com",
-        address="Quito",
-        tipo="Familiar"
-    )
-
-@pytest.fixture
-def difunto(tumba, deudo):
-    # Crea un difunto asociado a un deudo y una tumba
-    return Difunto.objects.create(
-        names="Juan",
-        last_names="Pérez",
-        idNumber="0987654321",
-        requestNumber="REQ001",
-        deudo=deudo,
-        tumba=tumba
-    )
-
-@pytest.fixture
-def servicio(tumba, difunto):
-    # Crea un servicio asociado a un difunto y una tumba
-    return Servicio.objects.create(
-        ceremony="Inhumacion",
-        is_paid=False,
-        amount_paid=Decimal("100.50"),
-        numberTomb=tumba,
-        deceased=difunto
-    )
 
 @pytest.mark.django_db
 def test_list_servicios(api_client, servicio):

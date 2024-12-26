@@ -1,5 +1,12 @@
 from rest_framework.routers import DefaultRouter
-from .viewsets import ObituarioViewSet, ObituarioReadViewSet, MemoriaViewSet, MemoriaReadViewSet, EtapasObituarioReadViewSet, EtapasObituarioViewSet
+from .viewsets import (
+    ObituarioViewSet,
+    ObituarioReadViewSet,
+    MemoriaViewSet,
+    MemoriaReadViewSet,
+    EtapasObituarioReadViewSet,
+    EtapasObituarioViewSet,
+)
 
 router=DefaultRouter()
 router.register(r'obituario',ObituarioViewSet, basename='obituario')

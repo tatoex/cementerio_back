@@ -2,56 +2,7 @@ import pytest
 from django.urls import reverse
 from rest_framework import status
 from servicio.models import Servicio
-from tumba.models import Tumba, Lote
-from difunto.models import Difunto, Deudo
-from decimal import Decimal
 from django.utils.timezone import now as timezone_now
-from rest_framework.test import APIClient
-
-@pytest.fixture
-def api_client():
-    return APIClient()
-
-@pytest.fixture
-def lote():
-    return Lote.objects.create(blockName=1, typeblock="A", numbersblock=10, filas=5, columnas=4, limite=20)
-
-@pytest.fixture
-def tumba(lote):
-    return Tumba.objects.create(nicheNumber=1, nicheType="E", available=True, nameLote=lote)
-
-@pytest.fixture
-def deudo():
-    return Deudo.objects.create(
-        names="John",
-        last_names="Doe",
-        idNumber="1234567890",
-        phoneNumber="0987654321",
-        email="john.doe@example.com",
-        address="Quito",
-        tipo="Familiar"
-    )
-
-@pytest.fixture
-def difunto(tumba, deudo):
-    return Difunto.objects.create(
-        names="Juan",
-        last_names="Pérez",
-        idNumber="0987654321",
-        requestNumber="REQ001",
-        deudo=deudo,
-        tumba=tumba
-    )
-
-@pytest.fixture
-def servicio(tumba, difunto):
-    return Servicio.objects.create(
-        ceremony="Inhumacion",
-        is_paid=False,
-        amount_paid=Decimal("100.50"),
-        numberTomb=tumba,
-        deceased=difunto
-    )
 
 @pytest.mark.django_db
 def test_list_servicios_integration(api_client, servicio):

@@ -2,7 +2,6 @@ from django.db import models
 from simple_history.models import HistoricalRecords
 from .base import BaseObituario
 from difunto.models import Difunto
-from servicio.models import Servicio
 from django.core.exceptions import ValidationError
 from django.utils.timezone import now
 
@@ -63,7 +62,6 @@ class EtapasObituario(BaseObituario):
     place = models.CharField(max_length=200, default=nadaa, blank=True, verbose_name='lugar de la ceremonia')
     history = HistoricalRecords()
     obituary = models.ForeignKey(Obituario, related_name='etapasObituario', on_delete=models.CASCADE)
-    ceremony = models.ForeignKey(Servicio, related_name='etapasCeremonia', on_delete=models.CASCADE)
     class Meta:
         permissions = [
                 ("can_view_etapasObituario", "Can view etapasObituario"),

@@ -9,6 +9,12 @@ class ObituarioSerializer(serializers.ModelSerializer):
         model = Obituario
         fields= '__all__'
 
+    def validate(self, data):
+        extra_fields = set(self.initial_data.keys()) - set(self.fields.keys())
+        if extra_fields:
+            raise serializers.ValidationError(f"Campos no válidos: {extra_fields}")
+        return data
+
 class MemoriaSerializer(serializers.ModelSerializer):
 
     class Meta:
