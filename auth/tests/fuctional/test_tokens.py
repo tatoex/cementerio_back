@@ -68,18 +68,16 @@ def test_refresh_token():
     """
     Verifica que el refresh token permita obtener un nuevo token de acceso.
     """
-    user = User.objects.create_user(username="testuser", password="securepassword")
+    _user = User.objects.create_user(username="testuser", password="securepassword")  # Prefijo `_` para evitar advertencias
     client = APIClient()
-
     # Solicitar tokens
     response = client.post('/api/token/', {"username": "testuser", "password": "securepassword"})
     refresh_token = response.data.get("refresh")
-
     # Solicitar un nuevo token de acceso con el refresh token
     response = client.post('/api/token/refresh/', {"refresh": refresh_token})
-
     assert response.status_code == 200
     assert "access" in response.data
+
 
 @pytest.mark.django_db
 def test_token_expired():

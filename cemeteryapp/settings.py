@@ -153,20 +153,9 @@ DATABASES = {
         'PASSWORD': os.getenv("DB_PASSWORD"),
         'HOST': os.getenv("DB_HOST", "localhost"),
         'PORT': os.getenv("DB_PORT", "3306"),
-        'OPTIONS': {
-            'init_command': "SET SESSION TRANSACTION ISOLATION LEVEL SERIALIZABLE; SET SESSION innodb_lock_wait_timeout=50;",
-            'charset': 'utf8mb4',
-        }
     }
 }
 
-# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-# EMAIL_HOST = os.getenv('EMAIL_HOST', 'smtp.gmail.com')  # Por defecto, Gmail
-# EMAIL_PORT = int(os.getenv('EMAIL_PORT', 587))          # Por defecto, 587
-# EMAIL_USE_TLS = os.getenv('EMAIL_USE_TLS', 'True') == 'True'
-# EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')          # Tu dirección de correo
-# EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')  # Contraseña de aplicación
-# DEFAULT_FROM_EMAIL = os.getenv('DEFAULT_FROM_EMAIL', 'noreply@example.com')  # Dirección predeterminada
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators

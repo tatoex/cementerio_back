@@ -12,6 +12,7 @@ def test_custom_token_obtain_pair_serializer():
     """
     Verifica que el CustomTokenObtainPairSerializer incluya roles, nombres y correo electrónico en el token.
     """
+    # Crear grupo y usuario
     group = Group.objects.create(name="Administrador")
     user = User.objects.create_user(
         username="testuser",
@@ -22,9 +23,10 @@ def test_custom_token_obtain_pair_serializer():
     )
     user.groups.add(group)
 
-    token = RefreshToken.for_user(user)
+    # Generar el token con el CustomTokenObtainPairSerializer
     serializer = CustomTokenObtainPairSerializer.get_token(user)
 
+    # Validar contenido del token
     assert serializer["roles"] == ["Administrador"]
     assert serializer["first_name"] == "Test"
     assert serializer["last_name"] == "User"

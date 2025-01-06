@@ -19,22 +19,5 @@ class Notification(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)         # Fecha de creación
     attended_at = models.DateTimeField(auto_now=True, blank=True)    # Fecha de atención (opcional)
 
-    # def save(self, *args, **kwargs):
-    #     if not self.pk:  # Nueva notificación
-    #         send_mail(
-    #             'Nueva Notificación',
-    #             f'Se ha creado una nueva notificación: {self.name}.',
-    #             'tu_email@gmail.com',  # Cambia a tu correo real
-    #             [self.email],
-    #         )
-    #     elif self.is_attended:  # Notificación atendida
-    #         send_mail(
-    #             'Notificación Atendida',
-    #             f'Tu notificación ha sido atendida: {self.name}.',
-    #             'tu_email@gmail.com',  # Cambia a tu correo real
-    #             [self.email],
-    #         )
-    #     super().save(*args, **kwargs)
-
     def __str__(self):
         return f"{self.area} - {self.name} - {'Atendido' if self.is_attended else 'Pendiente'}"

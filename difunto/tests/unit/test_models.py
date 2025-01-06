@@ -39,11 +39,13 @@ def test_deudo_default_address(deudo):
 @pytest.mark.django_db
 def test_deudo_history(deudo):
     initial_load_date = deudo.loadDate
+
     deudo.names = "Johnny"
     deudo.save()
     assert deudo.history.count() == 2
     assert deudo.history.first().names == "Johnny"
-
+    assert deudo.history.first().loadDate == initial_load_date  # Asegura que loadDate no cambió
+    
 # Pruebas para Difunto
 @pytest.mark.django_db
 def test_difunto_required_fields(deudo, tumba):
@@ -93,10 +95,12 @@ def test_difunto_history(deudo, tumba):
         deudo=deudo
     )
     initial_load_date = difunto.loadDate
+
     difunto.names = "Pedro"
     difunto.save()
     assert difunto.history.count() == 2
     assert difunto.history.first().names == "Pedro"
+    assert difunto.history.first().loadDate == initial_load_date  # Asegura que loadDate no cambió
 
 @pytest.mark.django_db
 def test_create_deudo(deudo):
