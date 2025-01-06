@@ -3,6 +3,7 @@ from datetime import datetime, timedelta
 from django.utils.timezone import now
 from historial.utils import obtener_historial_limitado, compara_varias_versiones
 from servicio.models import Servicio
+from decimal import Decimal
 
 @pytest.mark.django_db
 def test_obtener_historial_limitado_insuficientes_versiones(servicio):
@@ -43,5 +44,5 @@ def test_compara_varias_versiones_atributo_especifico(servicio):
     cambios = compara_varias_versiones(Servicio, servicio.id, attribute="amount_paid", limit=5)
     assert len(cambios) == 1
     assert cambios[0]["cambios"][0]["campo"] == "amount_paid"
-    assert cambios[0]["cambios"][0]["antes"] == 100.00
-    assert cambios[0]["cambios"][0]["despues"] == 150.00
+    assert Decimal(cambios[0]["cambios"][0]["antes"]) == Decimal("100.00")  # Comparación usando Decimal
+    assert Decimal(cambios[0]["cambios"][0]["despues"]) == Decimal("150.00")  # Comparación usando Decimal
