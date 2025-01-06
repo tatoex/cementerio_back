@@ -1,38 +1,10 @@
 from django.urls import reverse
 from rest_framework.test import APIClient
 from pytest import mark
-from datetime import timedelta
-from django.utils.timezone import now
-from tumba.models import Lote, Tumba
-from difunto.models import Deudo, Difunto
-from servicio.models import Servicio
 
 @mark.django_db
-def test_comparar_varias_versiones_success():
+def test_comparar_varias_versiones_success(servicio):
     client = APIClient()
-
-    # Crear datos de prueba
-    lote = Lote.objects.create(blockName=1, typeblock="A", numbersblock=10, filas=5, columnas=4, limite=20)
-    tumba = Tumba.objects.create(nicheNumber=1, nicheType="E", available=True, nameLote=lote)
-    deudo = Deudo.objects.create(
-        names="John", last_names="Doe", idNumber="1234567890",
-        phoneNumber="0987654321", email="john.doe@example.com",
-        address="Quito", tipo="Familiar"
-    )
-    difunto = Difunto.objects.create(
-        names="Maria", last_names="Gomez", idNumber="123456789",
-        requestNumber="REQ001", deudo=deudo, tumba=tumba
-    )
-    servicio = Servicio.objects.create(
-        startDate=now(),
-        endDate=now() + timedelta(days=7),
-        ceremony="Inhumacion",
-        is_paid=True,
-        amount_paid=100.00,
-        description="Servicio inicial",
-        numberTomb=tumba,
-        deceased=difunto
-    )
 
     # Modificar el objeto para generar historial
     servicio.amount_paid = 150.00
@@ -47,31 +19,8 @@ def test_comparar_varias_versiones_success():
 
 
 @mark.django_db
-def test_historical_action_success():
+def test_historical_action_success(servicio):
     client = APIClient()
-
-    # Crear datos de prueba
-    lote = Lote.objects.create(blockName=1, typeblock="A", numbersblock=10, filas=5, columnas=4, limite=20)
-    tumba = Tumba.objects.create(nicheNumber=1, nicheType="E", available=True, nameLote=lote)
-    deudo = Deudo.objects.create(
-        names="John", last_names="Doe", idNumber="1234567890",
-        phoneNumber="0987654321", email="john.doe@example.com",
-        address="Quito", tipo="Familiar"
-    )
-    difunto = Difunto.objects.create(
-        names="Maria", last_names="Gomez", idNumber="123456789",
-        requestNumber="REQ001", deudo=deudo, tumba=tumba
-    )
-    servicio = Servicio.objects.create(
-        startDate=now(),
-        endDate=now() + timedelta(days=7),
-        ceremony="Inhumacion",
-        is_paid=True,
-        amount_paid=100.00,
-        description="Servicio inicial",
-        numberTomb=tumba,
-        deceased=difunto
-    )
 
     # Modificar el objeto para generar historial
     servicio.amount_paid = 150.00
