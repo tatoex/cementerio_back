@@ -11,7 +11,6 @@ from .filters import NotificationFilter
 class NotificationViewSet(ModelViewSet):
     queryset = Notification.objects.all()
     serializer_class = NotificationSerializer
-    # permission_classes = [AllowAny]  # Permite que personas no autenticadas accedan a este ViewSet
     filter_backends = [DjangoFilterBackend]
     filterset_class = NotificationFilter
 
