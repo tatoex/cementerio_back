@@ -7,7 +7,6 @@ from obituarios.models import Obituario
 
 @pytest.mark.django_db
 def test_full_flow_obituario_creation(difunto):
-    client = APIClient()
 
     # Crear un obituario utilizando el fixture `difunto`
     obituario = Obituario.objects.create(
